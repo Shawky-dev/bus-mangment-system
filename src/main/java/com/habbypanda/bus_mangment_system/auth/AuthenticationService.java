@@ -20,11 +20,14 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
 
 
-    public AuthenticatiorResponse register(RegistrationRequest request) {
-        if (userRepository.findByEmail(request.getEmail()).isPresent()) {
-            return AuthenticatiorResponse.builder().message("user already exists").status(HttpStatus.CONFLICT).build();
+    public AuthenticatorResponse register(RegistrationRequest request) {
+        if (request.getName() == null || request.getEmail() == null || request.getPassword() == null) {
+            return AuthenticatorResponse.builder().message("Invalid credentials").status(HttpStatus.BAD_REQUEST).build();
         }
-        var user =  User.builder()
+        if (userRepository.findByEmail(request.getEmail()).isPresent()) {
+            return AuthenticatorResponse.builder().message("user already exists").status(HttpStatus.CONFLICT).build();
+        }
+        var user = User.builder()
                 .name(request.getName())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
@@ -32,14 +35,16 @@ public class AuthenticationService {
                 .build();
         userRepository.save(user);
         var jwtToken = jwtService.generateToken(user);
-        return  AuthenticatiorResponse.builder().jwt(jwtToken).message("user created succesfully").status(HttpStatus.CREATED).build();
+        return AuthenticatorResponse.builder().jwt(jwtToken).message("user created succesfully").status(HttpStatus.CREATED).build();
     }
 
-    public AuthenticatiorResponse authenticate(AuthenticationRequest request) {
-        //will autmaticaly throw an exception if email not found or password is wrong
+    public AuthenticatorResponse authenticate(AuthenticationRequest request) {
+        if (request.getEmail() == null || request.getPassword() == null) {
+            return AuthenticatorResponse.builder().message("Invalid credentials").status(HttpStatus.BAD_REQUEST).build();
+        } //will autmaticaly throw an exception if email not found or password is wrong
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
         var user = userRepository.findByEmail(request.getEmail()).orElseThrow();
         var jwtToken = jwtService.generateToken(user);
-        return AuthenticatiorResponse.builder().jwt(jwtToken).build();
+        return AuthenticatorResponse.builder().jwt(jwtToken).build();
     }
 }

@@ -10,7 +10,7 @@ import org.springframework.http.HttpStatus;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthenticatiorResponse {
+public class AuthenticatorResponse {
     private String jwt;
     private String message;
     private HttpStatus status;

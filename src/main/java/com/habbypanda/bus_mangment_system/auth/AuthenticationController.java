@@ -16,12 +16,12 @@ public class AuthenticationController {
 
 
     @PostMapping("/register")
-    public ResponseEntity<AuthenticatiorResponse> register(@RequestBody RegistrationRequest request){
-        AuthenticatiorResponse response = authenticationService.register(request);
-        return ResponseEntity.status(response.getStatus()).body(response);//TODO see a better way to send repsonse caue it displays the data fields of class AuthenticatiorResponse
+    public ResponseEntity<AuthenticatorResponse> register(@RequestBody RegistrationRequest request){
+        AuthenticatorResponse response = authenticationService.register(request);
+        return ResponseEntity.status(response.getStatus()).body(response);//TODO see a better way to send response cause it displays the data fields of class AuthenticatorResponse
     }
     @PostMapping("/authenticate")
-    public ResponseEntity<AuthenticatiorResponse> authenticate(@RequestBody AuthenticationRequest request){
+    public ResponseEntity<AuthenticatorResponse> authenticate(@RequestBody AuthenticationRequest request){
         return ResponseEntity.ok(authenticationService.authenticate(request));
     }
 }

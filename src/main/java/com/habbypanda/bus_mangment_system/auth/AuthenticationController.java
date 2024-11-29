@@ -17,10 +17,11 @@ public class AuthenticationController {
 
     @PostMapping("/register")
     public ResponseEntity<AuthenticatiorResponse> register(@RequestBody RegistrationRequest request){
-        return ResponseEntity.ok(authenticationService.register(request));
+        AuthenticatiorResponse response = authenticationService.register(request);
+        return ResponseEntity.status(response.getStatus()).body(response);//TODO see a better way to send repsonse caue it displays the data fields of class AuthenticatiorResponse
     }
     @PostMapping("/authenticate")
-    public ResponseEntity<AuthenticatiorResponse> register(@RequestBody AuthenticationRequest request){
+    public ResponseEntity<AuthenticatiorResponse> authenticate(@RequestBody AuthenticationRequest request){
         return ResponseEntity.ok(authenticationService.authenticate(request));
     }
 }

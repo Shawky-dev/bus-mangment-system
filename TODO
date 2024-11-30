@@ -1,5 +1,7 @@
 TODO:
 [x]:fix users can register twice with the same email
-[ ]:add logout
-[ ]:add student,parent,driver,admin Roles
+[ ]:add make User SuperClass and make student,driver,parent a subclass
+,change account registrations to allow creation of each of the account types
 [ ]:add reset password
+[ ]:add frontend
+[ ]:add logout

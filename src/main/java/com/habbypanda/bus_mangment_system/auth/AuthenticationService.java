@@ -155,7 +155,7 @@ public class AuthenticationService {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
         var user = adminRepository.findByEmail(request.getEmail()).orElseThrow();
         var jwtToken = jwtService.generateToken(user);
-        return AuthenticatorResponse.builder().jwt(jwtToken).status(HttpStatus.ACCEPTED).message(user.getClass().getSimpleName() +" created successfully").build();
+        return AuthenticatorResponse.builder().jwt(jwtToken).status(HttpStatus.ACCEPTED).message(user.getClass().getSimpleName() +" authenticated successfully").build();
     }
 
 

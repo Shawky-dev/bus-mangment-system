@@ -3,6 +3,7 @@ TODO:
 [x]:make User a Superclass and make student and parent inherit from it
 [x]:create register for each student and parent
 [x]:add driver,admin account type and their registration types
+[x]:add protected routes for admins only
 [ ]:add reset password
 [ ]:add student controller with routes(/getStudent,deleteStudent,updateStudent)
 [ ]:add parent controller with routes(/getParent,deleteParent,updateParent)

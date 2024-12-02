@@ -3,6 +3,7 @@ package com.habbypanda.bus_mangment_system.user;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,6 +12,7 @@ import java.util.Collection;
 import java.util.List;
 
 //lombok(builder, data, noargs, allargs)
+@Slf4j
 @NoArgsConstructor
 @AllArgsConstructor
 //jakarta persistence
@@ -28,9 +30,6 @@ public abstract class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        //getAuthorities() returns a list of authorities granted to the user
-        // so we use list of and pass the role name into the SimpleGrantedAuthority constructor,
-        // and it returns a list of authorities which in this case is a single authority
         return List.of(new SimpleGrantedAuthority(role.name()));
     }
     @Override

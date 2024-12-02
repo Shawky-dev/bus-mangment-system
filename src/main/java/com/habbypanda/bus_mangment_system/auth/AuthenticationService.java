@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -17,14 +18,18 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
+    private final ComposedDetailsService composedDetailsService;
 
 
     public AuthenticatorResponse registerParent(ParentRegistrationRequest request) {
         if (request.getName() == null || request.getEmail() == null || request.getPassword() == null) {
             return AuthenticatorResponse.builder().message("Invalid credentials").status(HttpStatus.BAD_REQUEST).build();
         }
-        if (parentRepository.findByEmail(request.getEmail()).isPresent() || studentRepository.findByEmail(request.getEmail()).isPresent()) {
+        try {
+            composedDetailsService.loadUserByUsername(request.getEmail());
             return AuthenticatorResponse.builder().message("user already exists").status(HttpStatus.CONFLICT).build();
+        } catch (UsernameNotFoundException e) {
+            // User not found, proceed with registration
         }
         Parent user = Parent.builder()
                 .name(request.getName())
@@ -41,8 +46,11 @@ public class AuthenticationService {
         if (request.getName() == null || request.getEmail() == null || request.getPassword() == null) {
             return AuthenticatorResponse.builder().message("Invalid credentials").status(HttpStatus.BAD_REQUEST).build();
         }
-        if (studentRepository.findByEmail(request.getEmail()).isPresent() || parentRepository.findByEmail(request.getEmail()).isPresent()) {
+        try {
+            composedDetailsService.loadUserByUsername(request.getEmail());
             return AuthenticatorResponse.builder().message("user already exists").status(HttpStatus.CONFLICT).build();
+        } catch (UsernameNotFoundException e) {
+            // User not found, proceed with registration
         }
         Student user = Student.builder()
                 .name(request.getName())

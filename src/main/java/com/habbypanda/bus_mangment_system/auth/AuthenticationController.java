@@ -15,14 +15,22 @@ public class AuthenticationController {
     private final AuthenticationService authenticationService;
 
 
-    @PostMapping("/register")
-    public ResponseEntity<AuthenticatorResponse> register(@RequestBody RegistrationRequest request){
-        AuthenticatorResponse response = authenticationService.register(request);
+    @PostMapping("/registerStudent")
+    public ResponseEntity<AuthenticatorResponse> registerStudent(@RequestBody StudentRegistrationRequest request){
+        AuthenticatorResponse response = authenticationService.registerStudent(request);
+        return ResponseEntity.status(response.getStatus()).body(response);//TODO see a better way to send response cause it displays the data fields of class AuthenticatorResponse
+    }@PostMapping("/registerParent")
+    public ResponseEntity<AuthenticatorResponse> registerParent(@RequestBody ParentRegistrationRequest request){
+        AuthenticatorResponse response = authenticationService.registerParent(request);
         return ResponseEntity.status(response.getStatus()).body(response);//TODO see a better way to send response cause it displays the data fields of class AuthenticatorResponse
     }
-    @PostMapping("/authenticate")
-    public ResponseEntity<AuthenticatorResponse> authenticate(@RequestBody AuthenticationRequest request){
-        AuthenticatorResponse response = authenticationService.authenticate(request);
+    @PostMapping("/authenticateStudent")
+    public ResponseEntity<AuthenticatorResponse> authenticateStudent(@RequestBody AuthenticationRequest request){
+        AuthenticatorResponse response = authenticationService.authenticateStudent(request);
+        return ResponseEntity.status(response.getStatus()).body(response);
+    } @PostMapping("/authenticateParent")
+    public ResponseEntity<AuthenticatorResponse> authenticateParent(@RequestBody AuthenticationRequest request){
+        AuthenticatorResponse response = authenticationService.authenticateParent(request);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 }

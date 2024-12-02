@@ -2,8 +2,6 @@ package com.habbypanda.bus_mangment_system.user;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -13,14 +11,12 @@ import java.util.Collection;
 import java.util.List;
 
 //lombok(builder, data, noargs, allargs)
-@Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 //jakarta persistence
 @Entity
-@Table(name = "_USER")
-public class User implements UserDetails {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class User implements UserDetails {
     @Id
     @GeneratedValue
     private Integer id;

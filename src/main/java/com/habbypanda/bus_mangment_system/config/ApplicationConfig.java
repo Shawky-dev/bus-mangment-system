@@ -1,5 +1,6 @@
 package com.habbypanda.bus_mangment_system.config;
 
+import com.habbypanda.bus_mangment_system.user.ComposedDetailsService;
 import com.habbypanda.bus_mangment_system.user.myUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -15,13 +16,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @RequiredArgsConstructor
 public class ApplicationConfig {
 
-    private final myUserDetailsService myUserDetailsService;
-
+    private final ComposedDetailsService composedDetailsService;
 
     @Bean
     public AuthenticationProvider authenticationProvider(){
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(myUserDetailsService);
+        authProvider.setUserDetailsService(composedDetailsService);
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
     }

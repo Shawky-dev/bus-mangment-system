@@ -1,6 +1,7 @@
 package com.habbypanda.bus_mangment_system.config;
 
-import com.habbypanda.bus_mangment_system.user.myUserDetailsService;
+import com.habbypanda.bus_mangment_system.user.ComposedDetailsService;
+
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,7 +21,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtService jwtService;
-    private final myUserDetailsService myUserDetailsService;
+    private final ComposedDetailsService composedDetailsService;
 
     @Override
     protected void doFilterInternal(
@@ -40,7 +41,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         jwt = authHeader.substring(7);
         userEmail = jwtService.extractEmail(jwt);
         if(userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null){
-            UserDetails userDetails = this.myUserDetailsService.loadUserByUsername(userEmail);
+            UserDetails userDetails = this.composedDetailsService.loadUserByUsername(userEmail);
             if(jwtService.isTokenValid(jwt,userDetails)){
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                         userDetails,

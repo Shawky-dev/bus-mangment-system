@@ -1,5 +1,7 @@
 package com.habbypanda.bus_mangment_system.user;
 
+import com.habbypanda.bus_mangment_system.user.admin.AdminDetailsService;
+import com.habbypanda.bus_mangment_system.user.driver.DriverDetailsService;
 import com.habbypanda.bus_mangment_system.user.parent.ParentDetailsService;
 import com.habbypanda.bus_mangment_system.user.student.StudentDetailsService;
 import jakarta.annotation.PostConstruct;
@@ -22,6 +24,10 @@ public class ComposedDetailsService implements UserDetailsService {
     private final StudentDetailsService studentDetailsService;
     @Autowired
     private final ParentDetailsService parentDetailsService;
+    @Autowired
+    private final AdminDetailsService adminDetailsService;
+    @Autowired
+    private final DriverDetailsService driverDetailsService;
 
     private List<UserDetailsService> services;
     @PostConstruct
@@ -29,6 +35,8 @@ public class ComposedDetailsService implements UserDetailsService {
         List<UserDetailsService> new_services = new ArrayList<>();
         new_services.add(this.studentDetailsService);
         new_services.add(this.parentDetailsService);
+        new_services.add(this.driverDetailsService);
+        new_services.add(this.adminDetailsService);
         this.services = new_services;
     }
     @Override

@@ -2,7 +2,7 @@ TODO:
 [x]:fix users can register twice with the same email
 [x]:make User a Superclass and make student and parent inherit from it
 [x]:create register for each student and parent
-[ ]:add driver,admin account type and their registration types
+[x]:add driver,admin account type and their registration types
 [ ]:add reset password
 [ ]:add student controller with routes(/getStudent,deleteStudent,updateStudent)
 [ ]:add parent controller with routes(/getParent,deleteParent,updateParent)

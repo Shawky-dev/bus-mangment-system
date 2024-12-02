@@ -1,21 +1,19 @@
-package com.habbypanda.bus_mangment_system.user;
+package com.habbypanda.bus_mangment_system.user.parent;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
-
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-@Log
 @Service
 @RequiredArgsConstructor
-public class StudentDetailsService implements UserDetailsService {
-    private final StudentRepository studentRepository;
+public class ParentDetailsService implements UserDetailsService {
+    private final ParentRepository parentRepository;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return this.studentRepository.findByEmail(username)
+        return this.parentRepository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 }

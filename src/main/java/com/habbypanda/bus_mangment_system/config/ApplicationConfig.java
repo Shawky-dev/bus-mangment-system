@@ -1,7 +1,6 @@
 package com.habbypanda.bus_mangment_system.config;
 
 import com.habbypanda.bus_mangment_system.user.ComposedDetailsService;
-import com.habbypanda.bus_mangment_system.user.myUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

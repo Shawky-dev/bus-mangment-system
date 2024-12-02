@@ -2,6 +2,10 @@ package com.habbypanda.bus_mangment_system.auth;
 
 import com.habbypanda.bus_mangment_system.config.JwtService;
 import com.habbypanda.bus_mangment_system.user.*;
+import com.habbypanda.bus_mangment_system.user.parent.Parent;
+import com.habbypanda.bus_mangment_system.user.parent.ParentRepository;
+import com.habbypanda.bus_mangment_system.user.student.Student;
+import com.habbypanda.bus_mangment_system.user.student.StudentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;

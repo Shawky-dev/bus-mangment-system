@@ -1,5 +1,8 @@
-package com.habbypanda.bus_mangment_system.user;
+package com.habbypanda.bus_mangment_system.user.student;
 
+import com.habbypanda.bus_mangment_system.user.parent.Parent;
+import com.habbypanda.bus_mangment_system.user.Role;
+import com.habbypanda.bus_mangment_system.user.User;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
@@ -11,7 +14,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor // Required by Hibernate
+@NoArgsConstructor
 @Entity
 @Table(name = "Student")
 public class Student extends User {
@@ -20,10 +23,10 @@ public class Student extends User {
     @JoinColumn(name = "parent_id")
     private Parent parent;
 
-    // Parameterized constructor for Builder
+
     @Builder
     public Student(Integer id, String name, String email, String password, Role role, Parent parent) {
-        super(id, name, email, password, role); // Calls the superclass constructor
+        super(id, name, email, password, role);
         this.parent = parent;
     }
 }

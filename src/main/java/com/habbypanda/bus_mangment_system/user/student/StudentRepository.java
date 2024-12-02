@@ -1,4 +1,4 @@
-package com.habbypanda.bus_mangment_system.user;
+package com.habbypanda.bus_mangment_system.user.student;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -1,5 +1,7 @@
 package com.habbypanda.bus_mangment_system.user;
 
+import com.habbypanda.bus_mangment_system.user.parent.ParentDetailsService;
+import com.habbypanda.bus_mangment_system.user.student.StudentDetailsService;
 import jakarta.annotation.PostConstruct;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;

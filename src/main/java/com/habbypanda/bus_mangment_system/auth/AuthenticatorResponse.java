@@ -14,5 +14,4 @@ public class AuthenticatorResponse {
     private String jwt;
     private String message;
     private HttpStatus status;
-
 }

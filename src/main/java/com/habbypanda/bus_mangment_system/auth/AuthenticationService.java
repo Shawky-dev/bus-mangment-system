@@ -45,11 +45,15 @@ public class AuthenticationService {
                 .name(request.getName())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .role(Role.USER)
                 .build();
         parentRepository.save(user);
         var jwtToken = jwtService.generateToken(user);
-        return AuthenticatorResponse.builder().jwt(jwtToken).message(user.getClass().getSimpleName() +" account created successfully").status(HttpStatus.CREATED).build();
+        return AuthenticatorResponse
+                .builder()
+                .jwt(jwtToken)
+                .message(user.getClass().getSimpleName() +" account created successfully")
+                .status(HttpStatus.CREATED)
+                .build();
     }
 
     public AuthenticatorResponse registerStudent(StudentRegistrationRequest request) {
@@ -66,7 +70,6 @@ public class AuthenticationService {
                 .name(request.getName())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .role(Role.USER)
                 .build();
         studentRepository.save(user);
         var jwtToken = jwtService.generateToken(user);
@@ -87,7 +90,6 @@ public class AuthenticationService {
                 .name(request.getName())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .role(Role.USER)
                 .build();
         driverRepository.save(user);
         var jwtToken = jwtService.generateToken(user);
@@ -107,7 +109,6 @@ public class AuthenticationService {
                 .name(request.getName())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .role(Role.ADMIN)
                 .build();
         adminRepository.save(user);
         var jwtToken = jwtService.generateToken(user);

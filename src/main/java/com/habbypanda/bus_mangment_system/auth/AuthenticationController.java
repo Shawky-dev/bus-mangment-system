@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
-
-
     @PostMapping("/registerStudent")
     public ResponseEntity<AuthenticatorResponse> registerStudent(@RequestBody StudentRegistrationRequest request){
         AuthenticatorResponse response = authenticationService.registerStudent(request);

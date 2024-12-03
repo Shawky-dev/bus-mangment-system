@@ -22,8 +22,8 @@ public class Parent extends User {
     @OneToOne(mappedBy = "parent", cascade = CascadeType.ALL)
     private Student student;
     @Builder
-    public Parent(Integer id, String name, String email, String password, Role role, Student student) {
-        super(id, name, email, password, role);
+    public Parent(Integer id, String name, String email, String password, Student student) {
+        super(id, name, email, password, Role.USER);
         this.student = student;
 
     }

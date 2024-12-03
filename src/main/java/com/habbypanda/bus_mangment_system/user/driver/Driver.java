@@ -19,8 +19,8 @@ public class Driver extends User {
 
 
     @Builder
-    public Driver(Integer id, String name, String email, String password, Role role, Integer driverLicense) {
-        super(id, name, email, password, role);
+    public Driver(Integer id, String name, String email, String password, Integer driverLicense) {
+        super(id, name, email, password, Role.USER);
         this.driverLicense = driverLicense;
     }
 }

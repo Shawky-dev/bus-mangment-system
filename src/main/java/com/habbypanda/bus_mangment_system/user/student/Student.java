@@ -25,8 +25,8 @@ public class Student extends User {
 
 
     @Builder
-    public Student(Integer id, String name, String email, String password, Role role, Parent parent) {
-        super(id, name, email, password, role);
+    public Student(Integer id, String name, String email, String password, Parent parent) {
+        super(id, name, email, password, Role.USER);
         this.parent = parent;
     }
 }

@@ -20,6 +20,6 @@ public class Admin extends User {
 
     @Builder
     public Admin(Integer id, String name, String email, String password) {
-        super(id, name, email, password, Role.USER);
+        super(id, name, email, password, Role.ADMIN);
     }
 }

@@ -33,12 +33,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         final String jwt;
         final String userEmail;
         //Case(1): if the Authorization header is null or does not start with "Bearer "
-        if(authHeader == null || !authHeader.startsWith("Bearer ")){
-            filterChain.doFilter(request,response);//pass the request to the next filter in the chain
+        jwt = extractJwtFromCookies(request);
+
+        // If no JWT is found, continue the filter chain
+        if(jwt == null){
+            filterChain.doFilter(request, response);
             return;
         }
-        //Case(2): if the Authorization header is not null and starts with "Bearer "
-        jwt = authHeader.substring(7);
         userEmail = jwtService.extractEmail(jwt);
         if(userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null){
             UserDetails userDetails = this.composedDetailsService.loadUserByUsername(userEmail);
@@ -54,5 +55,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
         filterChain.doFilter(request,response);
 
+    }
+    private String extractJwtFromCookies(HttpServletRequest request) {
+        if (request.getCookies() != null) {
+            for (var cookie : request.getCookies()) {
+                if ("jwt".equals(cookie.getName())) { // Assuming the cookie name is "jwt"
+                    return cookie.getValue();
+                }
+            }
+        }
+        return null;
     }
 }

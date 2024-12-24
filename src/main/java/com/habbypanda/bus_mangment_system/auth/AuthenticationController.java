@@ -75,5 +75,11 @@ public class AuthenticationController {
         JwtCheckResponse JWTResponse = authenticationService.checkAuth(userEmail);
         return ResponseEntity.status(JWTResponse.getStatus()).body(JWTResponse);
     }
+    @GetMapping("/logout")
+    public ResponseEntity<String> logout(HttpServletResponse response) {
+        AuthenticatorResponse authResponse = new AuthenticatorResponse();
+        authResponse.clearHttpOnlyCookie(response);
+        return ResponseEntity.status(authResponse.getStatus()).body(authResponse.getMessage());
+    }
 
 }

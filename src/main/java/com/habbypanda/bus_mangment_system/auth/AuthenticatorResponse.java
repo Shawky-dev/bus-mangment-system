@@ -25,6 +25,17 @@ public class AuthenticatorResponse {
             cookie.setPath("/");
             cookie.setMaxAge(86400); // 1 day in seconds
             response.addCookie(cookie);
+        }else{
+            setStatus(HttpStatus.UNAUTHORIZED);
         }
+    }
+    public void clearHttpOnlyCookie(HttpServletResponse response) {
+            Cookie cookie = new Cookie("jwt", null);
+            cookie.setHttpOnly(true);
+            cookie.setSecure(true); // Set to true if using HTTPS
+            cookie.setPath("/");
+            cookie.setMaxAge(0); // 1 day in seconds
+            response.addCookie(cookie);
+            setStatus(HttpStatus.OK);
     }
 }

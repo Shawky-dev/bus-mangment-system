@@ -1,5 +1,6 @@
 package com.habbypanda.bus_mangment_system.area;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,7 +10,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AreaRequest
+public class StudentAreaRequest
 {
-    private String name; // Name of the area (e.g., Tagmo3, Sheikh Zayed)
+    private Integer areaId;
+    private Integer studentId;
+
 }

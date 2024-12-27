@@ -24,7 +24,7 @@ public class Area {
     @Column(nullable = false, unique = true)
     private String name; // Name of the area (e.g., Tagmo3, Sheikh Zayed)
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "area_id") // Creates an area_id column in the Student table
     private List<Student> students = new ArrayList<>(); // Students linked to this area
 

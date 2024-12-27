@@ -4,7 +4,7 @@ TODO:
 [x]:create register for each student and parent
 [x]:add driver,admin account type and their registration types
 [x]:add protected routes for admins only
-[ ]:add reset password
 [ ]:add student controller with routes(/getStudent,deleteStudent,updateStudent)
+get all students get student by id get student by area
 [ ]:add parent controller with routes(/getParent,deleteParent,updateParent)
 [ ]:add frontend

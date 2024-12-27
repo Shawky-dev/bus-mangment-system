@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/dev/admin/area")
@@ -15,22 +14,49 @@ public class AreaController {
 
     private final AreaService areaService;
 
-    @PostMapping("/{areaId}/add-student/{studentId}")
-    public ResponseEntity<String> addStudentToArea(@PathVariable Integer areaId, @PathVariable Integer studentId) {
-        areaService.addStudentToArea(areaId, studentId);
-        return ResponseEntity.ok("Student added to area successfully");
+    // Edit Area
+    @PutMapping("/{areaId}/edit")
+    public ResponseEntity<AreaResponse> editArea(@PathVariable Integer areaId, @RequestBody AreaRequest areaRequest) {
+        AreaResponse response = areaService.editArea(areaId, areaRequest.getName());
+        return ResponseEntity.status(response.getStatus()).body(response);
     }
 
-    @GetMapping("/{areaId}/students")
-    public ResponseEntity<List<Student>> getStudentsInArea(@PathVariable Integer areaId) {
-        return ResponseEntity.ok(areaService.getStudentsInArea(areaId));
+    // Delete Area
+    @DeleteMapping("/{areaId}/delete")
+    public ResponseEntity<AreaResponse> deleteArea(@PathVariable Integer areaId) {
+        AreaResponse response = areaService.deleteArea(areaId);
+        return ResponseEntity.status(response.getStatus()).body(response);
     }
+
+    // Remove Student from Area
+    @DeleteMapping("/{areaId}/removeStudent/{studentId}")
+    public ResponseEntity<AreaResponse> removeStudentFromArea(@PathVariable Integer areaId, @PathVariable Integer studentId) {
+        AreaResponse response = areaService.removeStudentFromArea(areaId, studentId);
+        return ResponseEntity.status(response.getStatus()).body(response);
+    }
+
+
+    // Add a student to an area
+    @PostMapping("/addStudentToArea")
+    public ResponseEntity<AreaResponse> addStudentToArea(@RequestBody StudentAreaRequest request) {
+        AreaResponse response = areaService.addStudentToArea(request.getAreaId(), request.getStudentId());
+        return ResponseEntity.status(response.getStatus()).body(response);
+    }
+
+
+    // Get all students in an area
+    @GetMapping("/{areaId}/students")
+    public ResponseEntity<AreaResponse> getStudentsInArea(@PathVariable Integer areaId) {
+        AreaResponse response = areaService.getStudentsInArea(areaId);
+        return ResponseEntity.status(response.getStatus()).body(response);
+    }
+
 
     // Create a new area
-    @PostMapping
-    public ResponseEntity<Area> createArea(@RequestBody AreaRequest areaRequest) {
-        Area area = areaService.createArea(areaRequest.getName());
-        return ResponseEntity.ok(area);
+    @PostMapping("/createArea")
+    public ResponseEntity<AreaResponse> createArea(@RequestBody AreaRequest areaRequest) {
+        AreaResponse response = areaService.createArea(areaRequest.getName());
+        return ResponseEntity.status(response.getStatus()).body(response);
     }
 
     // Get all areas

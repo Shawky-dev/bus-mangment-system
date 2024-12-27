@@ -1,4 +1,4 @@
-package com.habbypanda.bus_mangment_system.area;
+package com.habbypanda.bus_mangment_system.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AreaRequest
+public class UserTypeRequest
 {
-    private String name; // Name of the area (e.g., Tagmo3, Sheikh Zayed)
+    private Type type;
 }

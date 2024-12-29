@@ -1,5 +1,6 @@
 package com.habbypanda.bus_mangment_system.area;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.habbypanda.bus_mangment_system.user.student.Student;
 import com.habbypanda.bus_mangment_system.route.Route;
 import jakarta.persistence.*;
@@ -28,7 +29,8 @@ public class Area {
     @JoinColumn(name = "area_id") // Creates an area_id column in the Student table
     private List<Student> students = new ArrayList<>(); // Students linked to this area
 
-    @OneToMany(mappedBy = "area", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "area", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Route> routes; // Routes generated for this area
 
     @Builder

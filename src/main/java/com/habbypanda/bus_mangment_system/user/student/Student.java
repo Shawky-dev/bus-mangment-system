@@ -1,7 +1,7 @@
 package com.habbypanda.bus_mangment_system.user.student;
 
 import com.habbypanda.bus_mangment_system.area.Area;
-import com.habbypanda.bus_mangment_system.route.DropOffPickUp;
+import com.habbypanda.bus_mangment_system.dropOff_pickUp.DropOffPickUp;
 import com.habbypanda.bus_mangment_system.user.parent.Parent;
 import com.habbypanda.bus_mangment_system.user.Role;
 import com.habbypanda.bus_mangment_system.user.User;

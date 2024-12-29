@@ -1,4 +1,4 @@
-package com.habbypanda.bus_mangment_system.route;
+package com.habbypanda.bus_mangment_system.dropOff_pickUp;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

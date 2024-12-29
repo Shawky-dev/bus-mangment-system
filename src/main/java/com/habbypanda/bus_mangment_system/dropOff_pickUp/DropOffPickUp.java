@@ -1,15 +1,12 @@
 package com.habbypanda.bus_mangment_system.dropOff_pickUp;
 
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.habbypanda.bus_mangment_system.area.Area;
-import com.habbypanda.bus_mangment_system.route.Route;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
-
 /**
- * Represents a static Drop-Off/Pick-Up location linked to Areas and Routes.
+ * Represents a static Drop-Off/Pick-Up location linked to Areas.
  */
 @Getter
 @Setter
@@ -28,10 +25,8 @@ public class DropOffPickUp {
 
     @ManyToOne
     @JoinColumn(name = "area_id", nullable = false)
+    @JsonBackReference
     private Area area; // Each location belongs to one area
-
-    @ManyToMany(mappedBy = "locations")
-    private List<Route> routes; // Locations can dynamically belong to multiple routes
 
     @Builder
     public DropOffPickUp(String locationName, Area area) {

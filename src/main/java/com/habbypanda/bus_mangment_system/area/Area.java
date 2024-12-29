@@ -35,6 +35,7 @@ public class Area {
     private List<Route> routes; // Routes generated for this area
 
     @OneToMany(mappedBy = "area", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<DropOffPickUp> dropOffPickUpLocations; // Static list of drop-off/pick-up locations
 
     @Builder

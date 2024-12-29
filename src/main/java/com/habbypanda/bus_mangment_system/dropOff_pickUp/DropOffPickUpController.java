@@ -26,16 +26,19 @@ public class DropOffPickUpController {
 
 
     // Get all DropOffPickUp locations for a specific area
-    @GetMapping("/area/{areaId}")
+    @GetMapping("/getArea/{areaId}")
     public ResponseEntity<DropOffPickUpResponse> getLocationsByArea(@PathVariable Integer areaId) {
         DropOffPickUpResponse response = dropOffPickUpService.getLocationsByArea(areaId);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
     // Delete a DropOffPickUp location
-    @DeleteMapping("/delete/{locationId}")
-    public ResponseEntity<DropOffPickUpResponse> deleteLocation(@PathVariable Integer locationId) {
-        DropOffPickUpResponse response = dropOffPickUpService.deleteLocation(locationId);
+    @DeleteMapping("/deleteLocation/{areaId}/{locationId}")
+    public ResponseEntity<DropOffPickUpResponse> deleteLocation(
+            @PathVariable Integer areaId,
+            @PathVariable Integer locationId) {
+        DropOffPickUpResponse response = dropOffPickUpService.deleteLocation(areaId, locationId);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
+
 }

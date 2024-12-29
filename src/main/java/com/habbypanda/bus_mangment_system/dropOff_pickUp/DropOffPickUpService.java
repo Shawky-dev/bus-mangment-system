@@ -81,11 +81,23 @@ public class DropOffPickUpService {
     }
 
     // Delete a DropOffPickUp location
-    public DropOffPickUpResponse deleteLocation(Integer locationId) {
-        Optional<DropOffPickUp> optionalLocation = dropOffPickUpRepository.findById(locationId);
-        if (optionalLocation.isEmpty()) {
+    public DropOffPickUpResponse deleteLocation(Integer areaId, Integer locationId) {
+        // Validate if the Area exists
+        Optional<Area> optionalArea = areaRepository.findById(areaId);
+        if (optionalArea.isEmpty()) {
             return DropOffPickUpResponse.builder()
-                    .message("Location not found")
+                    .message("Area not found")
+                    .status(HttpStatus.NOT_FOUND)
+                    .build();
+        }
+
+        Area area = optionalArea.get();
+
+        // Validate if the location exists within the specified Area
+        Optional<DropOffPickUp> optionalLocation = dropOffPickUpRepository.findById(locationId);
+        if (optionalLocation.isEmpty() || !optionalLocation.get().getArea().getId().equals(areaId)) {
+            return DropOffPickUpResponse.builder()
+                    .message("Location not found in the specified area")
                     .status(HttpStatus.NOT_FOUND)
                     .build();
         }
@@ -93,8 +105,9 @@ public class DropOffPickUpService {
         dropOffPickUpRepository.deleteById(locationId);
 
         return DropOffPickUpResponse.builder()
-                .message("Location deleted successfully")
+                .message("Location deleted successfully from the specified area")
                 .status(HttpStatus.OK)
                 .build();
     }
+
 }

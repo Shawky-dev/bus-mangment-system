@@ -21,14 +21,10 @@ public class Student extends User {
     private Parent parent;
 
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "location_id")
-    private DropOffPickUp location; // Shared location for both pick-up and drop-off
 
     @Builder
-    public Student(Integer id, String name, String email, String password, Parent parent, Area area, DropOffPickUp location) {
+    public Student(Integer id, String name, String email, String password, Parent parent, Area area) {
         super(id, name, email, password, Role.USER);
         this.parent = parent;
-        this.location = location;
     }
 }

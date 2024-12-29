@@ -124,4 +124,12 @@ public class RouteService {
                 .status(HttpStatus.OK)
                 .build();
     }
+
+    // Register a student for a route
+
+    //route statuses set to pending
+
+    //route sttatus set to starting
+
+    //route status set to completed
 }

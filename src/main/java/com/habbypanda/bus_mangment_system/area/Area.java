@@ -3,6 +3,7 @@ package com.habbypanda.bus_mangment_system.area;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.habbypanda.bus_mangment_system.user.student.Student;
 import com.habbypanda.bus_mangment_system.route.Route;
+import com.habbypanda.bus_mangment_system.dropOff_pickUp.DropOffPickUp;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -29,9 +30,12 @@ public class Area {
     @JoinColumn(name = "area_id") // Creates an area_id column in the Student table
     private List<Student> students = new ArrayList<>(); // Students linked to this area
 
-    @OneToMany(mappedBy = "area", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "area", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<Route> routes; // Routes generated for this area
+
+    @OneToMany(mappedBy = "area", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<DropOffPickUp> dropOffPickUpLocations; // Static list of drop-off/pick-up locations
 
     @Builder
     public Area(String name) {

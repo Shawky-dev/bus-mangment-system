@@ -4,29 +4,38 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.UUID;
-
+/**
+ * Controller for managing DropOffPickUp locations.
+ */
 @RestController
-@RequestMapping("/api/locations")
+@RequestMapping("/dev/admin/dropOffPickUp")
 @RequiredArgsConstructor
 public class DropOffPickUpController {
 
     private final DropOffPickUpService dropOffPickUpService;
 
-    @PostMapping
-    public ResponseEntity<DropOffPickUp> createLocation(@RequestBody String locationName) {
-        DropOffPickUp location = dropOffPickUpService.createLocation(locationName);
-        return ResponseEntity.ok(location);
+    @PostMapping("/create")
+    public ResponseEntity<DropOffPickUpResponse> createLocation(@RequestBody DropOffPickUpRequest request) {
+        DropOffPickUpResponse response = dropOffPickUpService.createLocation(
+                request.getAreaId(),
+                request.getLocationName()
+        );
+        return ResponseEntity.status(response.getStatus()).body(response);
     }
 
-    @GetMapping
-    public ResponseEntity<List<DropOffPickUp>> getAllLocations() {
-        return ResponseEntity.ok(dropOffPickUpService.getAllLocations());
+
+
+    // Get all DropOffPickUp locations for a specific area
+    @GetMapping("/area/{areaId}")
+    public ResponseEntity<DropOffPickUpResponse> getLocationsByArea(@PathVariable Integer areaId) {
+        DropOffPickUpResponse response = dropOffPickUpService.getLocationsByArea(areaId);
+        return ResponseEntity.status(response.getStatus()).body(response);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<DropOffPickUp> getLocationById(@PathVariable UUID id) {
-        return ResponseEntity.ok(dropOffPickUpService.getLocationById(id));
+    // Delete a DropOffPickUp location
+    @DeleteMapping("/delete/{locationId}")
+    public ResponseEntity<DropOffPickUpResponse> deleteLocation(@PathVariable Integer locationId) {
+        DropOffPickUpResponse response = dropOffPickUpService.deleteLocation(locationId);
+        return ResponseEntity.status(response.getStatus()).body(response);
     }
 }

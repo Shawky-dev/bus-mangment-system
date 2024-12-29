@@ -41,6 +41,7 @@ public class RouteService {
                 .timeSlot(timeSlot)
                 .type(type)
                 .area(area)
+                .status(RouteStatus.PENDING)
                 .build();
 
         routeRepository.save(route);
@@ -126,10 +127,114 @@ public class RouteService {
     }
 
     // Register a student for a route
+    public RouteResponse addStudentToRoute(Integer routeId, Integer studentId) {
+        // Validate Route
+        Optional<Route> optionalRoute = routeRepository.findById(routeId);
+        if (optionalRoute.isEmpty()) {
+            return RouteResponse.builder()
+                    .message("Route not found")
+                    .status(HttpStatus.NOT_FOUND)
+                    .build();
+        }
 
-    //route statuses set to pending
+        Route route = optionalRoute.get();
 
-    //route sttatus set to starting
+        // Check Route Status
+        if (route.getStatus() != RouteStatus.PENDING) {
+            return RouteResponse.builder()
+                    .message("Cannot add a student to a route that has already started or completed")
+                    .status(HttpStatus.BAD_REQUEST)
+                    .build();
+        }
 
-    //route status set to completed
+        // Validate Student
+        Optional<Student> optionalStudent = studentRepository.findById(studentId);
+        if (optionalStudent.isEmpty()) {
+            return RouteResponse.builder()
+                    .message("Student not found")
+                    .status(HttpStatus.NOT_FOUND)
+                    .build();
+        }
+
+        Student student = optionalStudent.get();
+
+        // Check if student is already added
+        if (route.getStudents().contains(student)) {
+            return RouteResponse.builder()
+                    .message("Student is already added to this route")
+                    .status(HttpStatus.CONFLICT)
+                    .build();
+        }
+
+        // Add Student to Route
+        route.getStudents().add(student);
+        routeRepository.save(route);
+
+        return RouteResponse.builder()
+                .message("Student added to route successfully")
+                .status(HttpStatus.OK)
+                .route(route)
+                .build();
+    }
+
+
+    //Start Ride
+    public RouteResponse startRoute(Integer routeId) {
+        Optional<Route> optionalRoute = routeRepository.findById(routeId);
+        if (optionalRoute.isEmpty()) {
+            return RouteResponse.builder()
+                    .message("Route not found")
+                    .status(HttpStatus.NOT_FOUND)
+                    .build();
+        }
+
+        Route route = optionalRoute.get();
+
+        if (route.getStatus() != RouteStatus.PENDING) {
+            return RouteResponse.builder()
+                    .message("Cannot start a route that is not in PENDING status")
+                    .status(HttpStatus.BAD_REQUEST)
+                    .build();
+        }
+
+        route.setStatus(RouteStatus.IN_PROGRESS);
+        routeRepository.save(route);
+
+        return RouteResponse.builder()
+                .message("Route started successfully")
+                .status(HttpStatus.OK)
+                .route(route)
+                .build();
+    }
+
+
+    //End Ride
+    public RouteResponse completeRoute(Integer routeId) {
+        Optional<Route> optionalRoute = routeRepository.findById(routeId);
+        if (optionalRoute.isEmpty()) {
+            return RouteResponse.builder()
+                    .message("Route not found")
+                    .status(HttpStatus.NOT_FOUND)
+                    .build();
+        }
+
+        Route route = optionalRoute.get();
+
+        if (route.getStatus() != RouteStatus.IN_PROGRESS) {
+            return RouteResponse.builder()
+                    .message("Cannot complete a route that is not in IN_PROGRESS status")
+                    .status(HttpStatus.BAD_REQUEST)
+                    .build();
+        }
+
+        route.setStatus(RouteStatus.COMPLETED);
+        routeRepository.save(route);
+
+        return RouteResponse.builder()
+                .message("Route completed successfully")
+                .status(HttpStatus.OK)
+                .route(route)
+                .build();
+    }
+
 }

@@ -36,6 +36,11 @@ public class Route {
     @Enumerated(EnumType.STRING)
     private RouteType type; // Type of route: PICKUP or DROPOFF
 
+    //Route Status
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private RouteStatus status;
+
     // Association with an Area (Many routes can be associated with one area)
     @ManyToOne
     @JoinColumn(name = "area_id", nullable = false)
@@ -56,10 +61,11 @@ public class Route {
     private List<Stop> stops; // Stops for the route
 
     @Builder
-    public Route(LocalDate date, LocalTime timeSlot, RouteType type, Area area) {
+    public Route(LocalDate date, LocalTime timeSlot, RouteType type, Area area,RouteStatus status) {
         this.date = date;
         this.timeSlot = timeSlot;
         this.type = type;
         this.area = area;
+        this.status = status;
     }
 }

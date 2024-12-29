@@ -2,16 +2,15 @@ package com.habbypanda.bus_mangment_system.auth;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.http.HttpStatus;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class AuthenticatorResponse {
     private String jwt;
     private String message;
@@ -36,6 +35,7 @@ public class AuthenticatorResponse {
             cookie.setPath("/");
             cookie.setMaxAge(0); // 1 day in seconds
             response.addCookie(cookie);
+
             setStatus(HttpStatus.OK);
     }
 }

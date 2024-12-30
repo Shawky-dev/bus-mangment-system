@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("dev/user")
 @RequiredArgsConstructor
-public class UserController
-{
+public class UserController {
     private final UserService userService;
+
     @GetMapping("/getAllUsers")
     public ResponseEntity<UserResponse> addStudentToArea(@RequestParam("type") Type type) {
         UserResponse response = userService.getAllUsers(type);

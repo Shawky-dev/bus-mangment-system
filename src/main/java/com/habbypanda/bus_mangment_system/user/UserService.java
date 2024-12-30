@@ -43,32 +43,5 @@ public class UserService {
                 .status(HttpStatus.OK)
                 .build();
     }
-    public <T> UserResponse<T> getUserByID(Type type, Integer id) {
-        T user;
-        switch (type) {
-            case STUDENT:
-                user = (T) studentRepository.findById(id)
-                        .orElseThrow(() -> new RuntimeException("Student not found"));
-                break;
-            case DRIVER:
-                user = (T) driverRepository.findById(id)
-                        .orElseThrow(() -> new RuntimeException("Driver not found"));
-                break;
-            case PARENT:
-                user = (T) parentRepository.findById(id)
-                        .orElseThrow(() -> new RuntimeException("Parent not found"));
-                break;
-            default:
-                return UserResponse.<T>builder()
-                        .message("Invalid user type")
-                        .status(HttpStatus.BAD_REQUEST)
-                        .build();
-        }
 
-        return UserResponse.<T>builder()
-                .message("User retrieved successfully")
-                .users(List.of(user))
-                .status(HttpStatus.OK)
-                .build();
-    }
 }

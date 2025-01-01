@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class AreaDTO {
     private Integer id;
     private String name;

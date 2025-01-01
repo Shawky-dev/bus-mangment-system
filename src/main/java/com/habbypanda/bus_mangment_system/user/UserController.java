@@ -1,5 +1,6 @@
 package com.habbypanda.bus_mangment_system.user;
 
+import com.habbypanda.bus_mangment_system.user.parent.ParentDTO;
 import com.habbypanda.bus_mangment_system.user.student.StudentDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +27,10 @@ public class UserController {
     @PostMapping("/updateStudent")
     public ResponseEntity<UserResponse> updateStudent(@RequestBody StudentDTO studentDTO) {
         UserResponse response = userService.updateStudent(studentDTO);
+        return ResponseEntity.ok(response);
+    }@PostMapping("/updateParent")
+    public ResponseEntity<UserResponse> updateParent(@RequestBody ParentDTO parentDTO) {
+        UserResponse response = userService.updateParent(parentDTO);
         return ResponseEntity.ok(response);
     }
 }

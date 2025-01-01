@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class RouteDTO {
     private Integer id;
     private LocalDate date;

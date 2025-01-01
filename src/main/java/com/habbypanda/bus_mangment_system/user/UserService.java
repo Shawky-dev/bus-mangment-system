@@ -2,6 +2,8 @@ package com.habbypanda.bus_mangment_system.user;
 
 import com.habbypanda.bus_mangment_system.user.admin.AdminManipulation;
 import com.habbypanda.bus_mangment_system.user.driver.DriverManipulation;
+import com.habbypanda.bus_mangment_system.user.parent.Parent;
+import com.habbypanda.bus_mangment_system.user.parent.ParentDTO;
 import com.habbypanda.bus_mangment_system.user.parent.ParentManipulation;
 import com.habbypanda.bus_mangment_system.user.student.Student;
 import com.habbypanda.bus_mangment_system.user.student.StudentDTO;
@@ -76,9 +78,15 @@ public class UserService {
         return new UserResponse(message, HttpStatus.OK, user);
     }
     public UserResponse updateStudent(StudentDTO studentDTO) {
-        Student student = studentManip.findById(studentDTO.getId()).orElseThrow(() -> new IllegalArgumentException("Student not found"));
+           Student student = studentManip.findById(studentDTO.getId()).orElseThrow(() -> new IllegalArgumentException("Student not found"));
         Student newStudent = studentManip.updateStudentFromDTO(student, studentDTO);
         studentManip.save(newStudent);
-        return new UserResponse("Student updated successfully", HttpStatus.OK, student);
+        return new UserResponse("Student updated successfully", HttpStatus.OK, newStudent);
+    }
+    public UserResponse updateParent(ParentDTO parentDTO) {
+           Parent parent = parentManip.findById(parentDTO.getId()).orElseThrow(() -> new IllegalArgumentException("Parent not found"));
+        Parent newParent = parentManip.updateParentFromDTO(parent, parentDTO);
+        parentManip.save(newParent);
+        return new UserResponse("Student updated successfully", HttpStatus.OK, newParent);
     }
 }

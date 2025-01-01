@@ -6,6 +6,7 @@ import lombok.*;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class AdminDTO extends UserDTO {
     private String department;
 

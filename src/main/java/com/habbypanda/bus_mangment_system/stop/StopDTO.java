@@ -7,6 +7,7 @@ import java.util.Optional;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class StopDTO {
     private Integer id;
     private String locationName;

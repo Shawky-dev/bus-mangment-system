@@ -6,6 +6,7 @@ import lombok.*;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class DriverDTO extends UserDTO {
     private Integer driverLicense;
 

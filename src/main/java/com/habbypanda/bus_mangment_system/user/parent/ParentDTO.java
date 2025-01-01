@@ -6,6 +6,7 @@ import lombok.*;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class ParentDTO extends UserDTO {
     private Integer studentId;
 

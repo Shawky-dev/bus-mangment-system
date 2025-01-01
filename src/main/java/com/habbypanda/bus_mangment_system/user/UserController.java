@@ -1,5 +1,7 @@
 package com.habbypanda.bus_mangment_system.user;
 
+import com.habbypanda.bus_mangment_system.user.admin.AdminDTO;
+import com.habbypanda.bus_mangment_system.user.driver.DriverDTO;
 import com.habbypanda.bus_mangment_system.user.parent.ParentDTO;
 import com.habbypanda.bus_mangment_system.user.student.StudentDTO;
 import lombok.RequiredArgsConstructor;
@@ -24,13 +26,24 @@ public class UserController {
         UserResponse response = userService.getUserById(id,type);
         return ResponseEntity.ok(response);
     }
-    @PostMapping("/updateStudent")
+    @PutMapping("/updateStudent")
     public ResponseEntity<UserResponse> updateStudent(@RequestBody StudentDTO studentDTO) {
         UserResponse response = userService.updateStudent(studentDTO);
         return ResponseEntity.ok(response);
-    }@PostMapping("/updateParent")
+    }
+    @PutMapping("/updateParent")
     public ResponseEntity<UserResponse> updateParent(@RequestBody ParentDTO parentDTO) {
         UserResponse response = userService.updateParent(parentDTO);
+        return ResponseEntity.ok(response);
+    }
+    @PutMapping("/updateAdmin")
+    public ResponseEntity<UserResponse> updateAdmin(@RequestBody AdminDTO adminDTO) {
+        UserResponse response = userService.updateAdmin(adminDTO);
+        return ResponseEntity.ok(response);
+    }
+@PutMapping("/updateDriver")
+    public ResponseEntity<UserResponse> updateDriver(@RequestBody DriverDTO driverDTO) {
+        UserResponse response = userService.updateDriver(driverDTO);
         return ResponseEntity.ok(response);
     }
 }

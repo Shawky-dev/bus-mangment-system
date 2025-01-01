@@ -1,6 +1,10 @@
 package com.habbypanda.bus_mangment_system.user;
 
+import com.habbypanda.bus_mangment_system.user.admin.Admin;
+import com.habbypanda.bus_mangment_system.user.admin.AdminDTO;
 import com.habbypanda.bus_mangment_system.user.admin.AdminManipulation;
+import com.habbypanda.bus_mangment_system.user.driver.Driver;
+import com.habbypanda.bus_mangment_system.user.driver.DriverDTO;
 import com.habbypanda.bus_mangment_system.user.driver.DriverManipulation;
 import com.habbypanda.bus_mangment_system.user.parent.Parent;
 import com.habbypanda.bus_mangment_system.user.parent.ParentDTO;
@@ -87,6 +91,18 @@ public class UserService {
            Parent parent = parentManip.findById(parentDTO.getId()).orElseThrow(() -> new IllegalArgumentException("Parent not found"));
         Parent newParent = parentManip.updateParentFromDTO(parent, parentDTO);
         parentManip.save(newParent);
-        return new UserResponse("Student updated successfully", HttpStatus.OK, newParent);
+        return new UserResponse("Parent updated successfully", HttpStatus.OK, newParent);
+    }
+    public UserResponse updateAdmin(AdminDTO adminDTO) {
+           Admin admin  = adminManip.findById(adminDTO.getId()).orElseThrow(() -> new IllegalArgumentException("Admin not found"));
+        Admin newAdmin = adminManip.updateAdminFromDTO(admin, adminDTO);
+        adminManip.save(newAdmin);
+        return new UserResponse("Admin updated successfully", HttpStatus.OK, newAdmin);
+    }
+    public UserResponse updateDriver(DriverDTO driverDTO) {
+           Driver driver  = driverManip.findById(driverDTO.getId()).orElseThrow(() -> new IllegalArgumentException("Driver not found"));
+        Driver newDriver = driverManip.updateDriverFromDTO(driver, driverDTO);
+        driverManip.save(newDriver);
+        return new UserResponse("Driver updated successfully", HttpStatus.OK, newDriver);
     }
 }

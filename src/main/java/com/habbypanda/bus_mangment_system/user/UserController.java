@@ -1,12 +1,16 @@
 package com.habbypanda.bus_mangment_system.user;
 
+import com.habbypanda.bus_mangment_system.user.student.StudentDTO;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/dev/user")
 @RequiredArgsConstructor
+@Slf4j
 public class UserController {
     private final UserService userService;
     @GetMapping("/getAllUsers")
@@ -19,9 +23,9 @@ public class UserController {
         UserResponse response = userService.getUserById(id,type);
         return ResponseEntity.ok(response);
     }
-//    @PutMapping("/updateUserById")
-//    public ResponseEntity<UserResponse> updateUserById(@RequestParam Integer id, Type type, @RequestBody UserDTO userDTO) {
-//        UserResponse response = userService.updateUserById(id, type, userDTO);
-//        return ResponseEntity.ok(response);
-//    }
+    @PostMapping("/updateStudent")
+    public ResponseEntity<UserResponse> updateStudent(@RequestBody StudentDTO studentDTO) {
+        UserResponse response = userService.updateStudent(studentDTO);
+        return ResponseEntity.ok(response);
+    }
 }

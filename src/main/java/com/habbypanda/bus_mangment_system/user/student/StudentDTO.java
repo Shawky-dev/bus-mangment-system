@@ -10,6 +10,7 @@ import static org.aspectj.weaver.ResolvedTypeMunger.Parent;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class StudentDTO extends UserDTO {
     private Integer parentId;
     private Integer areaId;

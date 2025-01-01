@@ -8,9 +8,11 @@ import com.habbypanda.bus_mangment_system.user.parent.ParentRepository;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 public class StudentManipulation extends UserManipulation<Student> {
     private final AreaRepository areaRepository;
     private final ParentRepository parentRepository;
@@ -20,14 +22,18 @@ public class StudentManipulation extends UserManipulation<Student> {
         this.parentRepository = parentRepository;
     }
     public Student updateStudentFromDTO(Student student, StudentDTO studentDTO) {
-        return new Student(
-                student.getId(),
-                studentDTO.getName(),
-                studentDTO.getEmail(),
-                student.getPassword(),
-                parentRepository.findById(studentDTO.getParentId()).orElse(null),
-                areaRepository.findById(studentDTO.getAreaId()).orElse(null)
-        );
+        Parent parent = (studentDTO.getParentId() != null) ? parentRepository.findById(studentDTO.getParentId()).orElse(null) : null;
+        Area area = (studentDTO.getAreaId() != null) ? areaRepository.findById(studentDTO.getAreaId()).orElse(null) : null;
+        Student newStudent = Student.builder()
+                .id(student.getId())
+                .name(studentDTO.getName())
+                .email(studentDTO.getEmail())
+                .password(student.getPassword())
+                .parent(parent)
+                .area(area)
+                .build();
+        log.info("Student updated successfully");
+        return newStudent;
     }
 }
 

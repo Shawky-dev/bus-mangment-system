@@ -75,35 +75,10 @@ public class UserService {
         }
         return new UserResponse(message, HttpStatus.OK, user);
     }
-
-//    public UserResponse updateUserById(Type type, UserDTO userDTO) {
-//        User user;
-//        String message;
-//        try {
-//            switch (type) {
-//                case STUDENT:
-//                    Student oldStudent = studentManip.findById(userDTO.getId()).orElseThrow(() -> new IllegalArgumentException("User not found"));
-//                    StudentDTO newStudent = new StudentDTO(userDTO);
-//                    message = "Student updated successfully";
-//                    break;
-//                case DRIVER:
-//                    user = driverManip.update(new Driver(userDTO));
-//                    message = "Driver updated successfully";
-//                    break;
-//                case PARENT:
-//                    user = parentManip.update(new Parent(userDTO));
-//                    message = "Parent updated successfully";
-//                    break;
-//                case ADMIN:
-//                    user = adminManip.update(new Admin(userDTO));
-//                    message = "Admin updated successfully";
-//                    break;
-//                default:
-//                    return new UserResponse("Invalid type", HttpStatus.BAD_REQUEST, null);
-//            }
-//        } catch (IllegalArgumentException e) {
-//            return new UserResponse(e.getMessage(), HttpStatus.NOT_FOUND, null);
-//        }
-//        return new UserResponse(message, HttpStatus.OK, user);
-//    }
+    public UserResponse updateStudent(StudentDTO studentDTO) {
+        Student student = studentManip.findById(studentDTO.getId()).orElseThrow(() -> new IllegalArgumentException("Student not found"));
+        Student newStudent = studentManip.updateStudentFromDTO(student, studentDTO);
+        studentManip.save(newStudent);
+        return new UserResponse("Student updated successfully", HttpStatus.OK, student);
+    }
 }

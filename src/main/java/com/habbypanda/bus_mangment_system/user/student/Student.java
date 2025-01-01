@@ -29,4 +29,5 @@ public class Student extends User {
         this.parent = parent;
         this.area = area;
     }
+ 
 }

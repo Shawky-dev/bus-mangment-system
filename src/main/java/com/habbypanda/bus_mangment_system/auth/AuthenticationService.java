@@ -161,9 +161,9 @@ public class AuthenticationService {
     }
 
 
-    public JwtCheckResponse checkAuth(String userEmail) {
+    public UserResponse checkAuth(String userEmail) {
         UserDetails userDetails = composedDetailsService.loadUserByUsername(userEmail);
         User user = (User) userDetails;
-        return JwtCheckResponse.builder().role(user.getRole()).email(user.getEmail()).message("Authorized").status(HttpStatus.OK).build();
+        return new UserResponse("User authenticated", HttpStatus.OK, user);
     }
 }

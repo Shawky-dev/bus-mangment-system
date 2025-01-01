@@ -1,5 +1,6 @@
 package com.habbypanda.bus_mangment_system.auth;
 
+import com.habbypanda.bus_mangment_system.user.UserResponse;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -71,9 +72,9 @@ public class AuthenticationController {
     }
 
     @GetMapping("/check")
-    public ResponseEntity<JwtCheckResponse> checkAuth(@RequestAttribute String userEmail) {
-        JwtCheckResponse JWTResponse = authenticationService.checkAuth(userEmail);
-        return ResponseEntity.status(JWTResponse.getStatus()).body(JWTResponse);
+    public ResponseEntity<UserResponse> checkAuth(@RequestAttribute String userEmail) {
+        UserResponse response = authenticationService.checkAuth(userEmail);
+        return ResponseEntity.status(response.getStatus()).body(response);
     }
     @GetMapping("/logout")
     public ResponseEntity<String> logout(HttpServletResponse response) {

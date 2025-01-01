@@ -8,9 +8,8 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 public class AdminDTO extends UserDTO {
-    private String department;
 
-    public AdminDTO(Integer id, String name, String email, Role role, String department) {
+    public AdminDTO(Integer id, String name, String email, Role role) {
         super(id, name, email, role);
     }
 

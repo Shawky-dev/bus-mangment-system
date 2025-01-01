@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 @NoArgsConstructor
 public class JwtCheckResponse {
     private Role role;
+    private String email;
     private String message;
     private HttpStatus status;
 }

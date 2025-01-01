@@ -1,4 +1,4 @@
-package com.habbypanda.bus_mangment_system.dropOff_pickUp;
+package com.habbypanda.bus_mangment_system.stop;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.habbypanda.bus_mangment_system.area.Area;
@@ -14,7 +14,7 @@ import lombok.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "dropoff_pickup")
-public class DropOffPickUp {
+public class Stop {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-incremented ID
@@ -29,7 +29,7 @@ public class DropOffPickUp {
     private Area area; // Each location belongs to one area
 
     @Builder
-    public DropOffPickUp(String locationName, Area area) {
+    public Stop(String locationName, Area area) {
         this.locationName = locationName;
         this.area = area;
     }

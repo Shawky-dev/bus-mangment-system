@@ -1,4 +1,4 @@
-package com.habbypanda.bus_mangment_system.dropOff_pickUp;
+package com.habbypanda.bus_mangment_system.stop;
 
 import lombok.*;
 import org.springframework.http.HttpStatus;
@@ -12,9 +12,9 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class DropOffPickUpResponse {
+public class StopResponse {
     private String message;
     private HttpStatus status;
-    private DropOffPickUp location; // For single location operations
-    private List<DropOffPickUp> locations; // For list-based operations
+    private Stop location; // For single location operations
+    private List<Stop> locations; // For list-based operations
 }

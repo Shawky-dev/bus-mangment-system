@@ -3,7 +3,7 @@ package com.habbypanda.bus_mangment_system.route;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.habbypanda.bus_mangment_system.area.Area;
 import com.habbypanda.bus_mangment_system.user.student.Student;
-import com.habbypanda.bus_mangment_system.dropOff_pickUp.DropOffPickUp;
+import com.habbypanda.bus_mangment_system.stop.Stop;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -54,11 +54,11 @@ public class Route {
     // Association with DropOffPickUp (Many routes can have many locations)
     @ManyToMany
     @JoinTable(
-            name = "route_locations",
+            name = "route_stops",
             joinColumns = @JoinColumn(name = "route_id"),
-            inverseJoinColumns = @JoinColumn(name = "location_id")
+            inverseJoinColumns = @JoinColumn(name = "stop_id")
     )
-    private List<DropOffPickUp> locations; // Drop-off/Pick-up locations for the route
+    private List<Stop> stops; // Drop-off/Pick-up locations for the route
 
     @Builder
     public Route(LocalDate date, LocalTime timeSlot, RouteType type, Area area) {

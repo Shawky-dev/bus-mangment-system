@@ -23,6 +23,7 @@ public class UserService {
         switch (type) {
             case STUDENT:
                 users = (List<T>) studentRepository.findAll();
+
                 break;
             case DRIVER:
                 users = (List<T>) driverRepository.findAll();

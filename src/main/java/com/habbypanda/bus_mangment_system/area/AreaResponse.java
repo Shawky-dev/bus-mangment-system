@@ -31,5 +31,11 @@ public class AreaResponse {
     /**
      * Optionally, include area details if needed.
      */
-    private Area area;
+    private AreaDTO area;
+
+    public AreaResponse(String message, HttpStatus status,Area area) {
+        this.message = message;
+        this.status = status;
+        this.area = new AreaDTO(area);
+    }
 }

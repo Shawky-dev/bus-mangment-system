@@ -1,4 +1,4 @@
-package com.habbypanda.bus_mangment_system.dropOff_pickUp;
+package com.habbypanda.bus_mangment_system.stop;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class DropOffPickUpRequest {
+public class StopRequest {
     private String locationName; // Name of the location (e.g., Gate 1, Street 5)
     private Integer areaId;      // ID of the associated area
 }

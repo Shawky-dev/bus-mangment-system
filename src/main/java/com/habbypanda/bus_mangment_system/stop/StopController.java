@@ -1,4 +1,4 @@
-package com.habbypanda.bus_mangment_system.dropOff_pickUp;
+package com.habbypanda.bus_mangment_system.stop;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/dev/admin/dropOffPickUp")
 @RequiredArgsConstructor
-public class DropOffPickUpController {
+public class StopController {
 
-    private final DropOffPickUpService dropOffPickUpService;
+    private final StopService stopService;
 
     @PostMapping("/create")
-    public ResponseEntity<DropOffPickUpResponse> createLocation(@RequestBody DropOffPickUpRequest request) {
-        DropOffPickUpResponse response = dropOffPickUpService.createLocation(
+    public ResponseEntity<StopResponse> createLocation(@RequestBody StopRequest request) {
+        StopResponse response = stopService.createLocation(
                 request.getAreaId(),
                 request.getLocationName()
         );
@@ -27,17 +27,17 @@ public class DropOffPickUpController {
 
     // Get all DropOffPickUp locations for a specific area
     @GetMapping("/getArea/{areaId}")
-    public ResponseEntity<DropOffPickUpResponse> getLocationsByArea(@PathVariable Integer areaId) {
-        DropOffPickUpResponse response = dropOffPickUpService.getLocationsByArea(areaId);
+    public ResponseEntity<StopResponse> getLocationsByArea(@PathVariable Integer areaId) {
+        StopResponse response = stopService.getLocationsByArea(areaId);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
     // Delete a DropOffPickUp location
     @DeleteMapping("/deleteLocation/{areaId}/{locationId}")
-    public ResponseEntity<DropOffPickUpResponse> deleteLocation(
+    public ResponseEntity<StopResponse> deleteLocation(
             @PathVariable Integer areaId,
             @PathVariable Integer locationId) {
-        DropOffPickUpResponse response = dropOffPickUpService.deleteLocation(areaId, locationId);
+        StopResponse response = stopService.deleteLocation(areaId, locationId);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 

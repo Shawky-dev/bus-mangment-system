@@ -3,13 +3,12 @@ package com.habbypanda.bus_mangment_system.area;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.habbypanda.bus_mangment_system.user.student.Student;
 import com.habbypanda.bus_mangment_system.route.Route;
-import com.habbypanda.bus_mangment_system.dropOff_pickUp.DropOffPickUp;
+import com.habbypanda.bus_mangment_system.stop.Stop;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -36,7 +35,7 @@ public class Area {
 
     @OneToMany(mappedBy = "area", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
-    private List<DropOffPickUp> dropOffPickUpLocations; // Static list of drop-off/pick-up locations
+    private List<Stop> stopLocations; // Static list of drop-off/pick-up locations
 
     @Builder
     public Area(String name) {

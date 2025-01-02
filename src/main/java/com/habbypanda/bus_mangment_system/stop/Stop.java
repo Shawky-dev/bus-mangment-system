@@ -25,7 +25,7 @@ public class Stop {
 
     @ManyToOne
     @JoinColumn(name = "area_id", nullable = false)
-    @JsonBackReference
+
     private Area area; // Each location belongs to one area
 
     @Builder

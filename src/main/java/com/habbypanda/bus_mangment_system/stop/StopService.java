@@ -23,61 +23,36 @@ public class StopService {
     public StopResponse createStop(Integer areaId, String stopName) {
         Optional<Area> optionalArea = areaRepository.findById(areaId);
         if (optionalArea.isEmpty()) {
-            return StopResponse.builder()
-                    .message("Area not found")
-                    .status(HttpStatus.NOT_FOUND)
-                    .build();
+            return new StopResponse("Area not found", HttpStatus.NOT_FOUND, null, null);
         }
 
         Area area = optionalArea.get();
 
         if (stopName == null || stopName.trim().isEmpty()) {
-            return StopResponse.builder()
-                    .message("stop name cannot be empty")
-                    .status(HttpStatus.BAD_REQUEST)
-                    .build();
+            return new StopResponse("stop name cannot be empty", HttpStatus.BAD_REQUEST, null, null);
         }
 
-        Stop stop = Stop.builder()
-                .stopName(stopName)
-                .area(area)
-                .build();
+        Stop stop = new Stop(stopName, area);
 
         stopRepository.save(stop);
 
-        return StopResponse.builder()
-                .message("stop created successfully")
-                .status(HttpStatus.CREATED)
-                .stop(stop)
-                .build();
+        return new StopResponse("stop created successfully", HttpStatus.CREATED, stop, null);
     }
-
-
 
     // Get all stops for a specific area
     public StopResponse getStopsByArea(Integer areaId) {
         boolean areaExists = areaRepository.existsById(areaId);
         if (!areaExists) {
-            return StopResponse.builder()
-                    .message("Area not found")
-                    .status(HttpStatus.NOT_FOUND)
-                    .build();
+            return new StopResponse("Area not found", HttpStatus.NOT_FOUND, null, null);
         }
 
         List<Stop> stops = stopRepository.findByAreaId(areaId);
 
         if (stops.isEmpty()) {
-            return StopResponse.builder()
-                    .message("No stops found for this area")
-                    .status(HttpStatus.NOT_FOUND)
-                    .build();
+            return new StopResponse("No stops found for this area", HttpStatus.NOT_FOUND, null, null);
         }
 
-        return StopResponse.builder()
-                .message("stops retrieved successfully")
-                .status(HttpStatus.OK)
-                .stops(stops)
-                .build();
+        return new StopResponse("stops retrieved successfully", HttpStatus.OK, null, stops);
     }
 
     // Delete a DropOffPickUp stop
@@ -85,10 +60,7 @@ public class StopService {
         // Validate if the Area exists
         Optional<Area> optionalArea = areaRepository.findById(areaId);
         if (optionalArea.isEmpty()) {
-            return StopResponse.builder()
-                    .message("Area not found")
-                    .status(HttpStatus.NOT_FOUND)
-                    .build();
+            return new StopResponse("Area not found", HttpStatus.NOT_FOUND, null, null);
         }
 
         Area area = optionalArea.get();
@@ -96,18 +68,12 @@ public class StopService {
         // Validate if the stop exists within the specified Area
         Optional<Stop> optionalStop = stopRepository.findById(stopId);
         if (optionalStop.isEmpty() || !optionalStop.get().getArea().getId().equals(areaId)) {
-            return StopResponse.builder()
-                    .message("stop not found in the specified area")
-                    .status(HttpStatus.NOT_FOUND)
-                    .build();
+            return new StopResponse("stop not found in the specified area", HttpStatus.NOT_FOUND, null, null);
         }
 
         stopRepository.deleteById(stopId);
 
-        return StopResponse.builder()
-                .message("stop deleted successfully from the specified area")
-                .status(HttpStatus.OK)
-                .build();
+        return new StopResponse("stop deleted successfully from the specified area", HttpStatus.OK, null, null);
     }
 
 }

@@ -1,6 +1,7 @@
 package com.habbypanda.bus_mangment_system.user.student;
 
 import com.habbypanda.bus_mangment_system.area.Area;
+import com.habbypanda.bus_mangment_system.route.Route;
 import com.habbypanda.bus_mangment_system.stop.Stop;
 import com.habbypanda.bus_mangment_system.user.parent.Parent;
 import com.habbypanda.bus_mangment_system.user.Role;
@@ -19,9 +20,15 @@ public class Student extends User {
     @OneToOne
     @JoinColumn(name = "parent_id")
     private Parent parent;
+
     @ManyToOne
     @JoinColumn(name = "area_id")
     private Area area;
+
+    // Association with Route (Many students can have one route)
+    @ManyToOne
+    @JoinColumn(name = "route_id")
+    private Route route; // Route associated with the student
 
     @ManyToOne
     @JoinColumn(name = "stop_id")

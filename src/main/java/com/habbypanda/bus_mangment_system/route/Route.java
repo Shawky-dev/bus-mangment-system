@@ -42,13 +42,8 @@ public class Route {
     @JsonBackReference
     private Area area; // Association with an Area
 
-    // Association with Student (Many routes can have many students)
-    @ManyToMany
-    @JoinTable(
-            name = "route_students",
-            joinColumns = @JoinColumn(name = "route_id"),
-            inverseJoinColumns = @JoinColumn(name = "student_id")
-    )
+    // Association with Student (One route can have many students)
+    @OneToMany(mappedBy = "route")
     private List<Student> students; // Students registered for this route
 
     // Association with Stops (Many routes can have many stops)

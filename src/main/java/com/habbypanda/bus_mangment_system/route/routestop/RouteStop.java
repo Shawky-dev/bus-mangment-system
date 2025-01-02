@@ -1,16 +1,17 @@
-package com.habbypanda.bus_mangment_system.route;
+package com.habbypanda.bus_mangment_system.route.routestop;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.habbypanda.bus_mangment_system.route.Route;
 import com.habbypanda.bus_mangment_system.stop.Stop;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "route_stops")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")

@@ -3,7 +3,7 @@ package com.habbypanda.bus_mangment_system.route;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.habbypanda.bus_mangment_system.area.Area;
-import com.habbypanda.bus_mangment_system.stop.Stop;
+import com.habbypanda.bus_mangment_system.route.routestop.RouteStop;
 import jakarta.persistence.*;
 import lombok.*;
 

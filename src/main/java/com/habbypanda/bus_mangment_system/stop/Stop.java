@@ -1,36 +1,29 @@
 package com.habbypanda.bus_mangment_system.stop;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.habbypanda.bus_mangment_system.area.Area;
+import com.habbypanda.bus_mangment_system.route.Route;
 import jakarta.persistence.*;
 import lombok.*;
 
-/**
- * Represents a static Drop-Off/Pick-Up location linked to Areas.
- */
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "stops")
+@AllArgsConstructor
+@Builder
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+
 public class Stop {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-incremented ID
+    @GeneratedValue
     private Integer id;
-
-    @Column(nullable = false)
-    private String stopName; // Descriptive name of the location (e.g., Gate 1, Street 5)
+    private String name;
 
     @ManyToOne
     @JoinColumn(name = "area_id", nullable = false)
+    private Area area;
 
-    private Area area; // Each location belongs to one area
-
-    @Builder
-    public Stop(String stopName, Area area) {
-        this.stopName = stopName;
-        this.area = area;
-    }
 }

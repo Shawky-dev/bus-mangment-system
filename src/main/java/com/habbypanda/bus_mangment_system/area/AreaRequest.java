@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AreaRequest
-{
-    private String name; // Name of the area (e.g., Tagmo3, Sheikh Zayed)
+public class AreaRequest {
+    private String name;
 }

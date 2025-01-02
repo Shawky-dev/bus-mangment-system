@@ -1,5 +1,7 @@
 package com.habbypanda.bus_mangment_system.user.driver;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.habbypanda.bus_mangment_system.user.Role;
 import com.habbypanda.bus_mangment_system.user.User;
 import jakarta.persistence.Entity;
@@ -14,6 +16,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table(name = "drivers")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+
 public class Driver extends User {
     private Integer driverLicense;
 

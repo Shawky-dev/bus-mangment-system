@@ -1,5 +1,7 @@
 package com.habbypanda.bus_mangment_system.user.parent;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.habbypanda.bus_mangment_system.user.Role;
 import com.habbypanda.bus_mangment_system.user.User;
 import com.habbypanda.bus_mangment_system.user.student.Student;
@@ -17,6 +19,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "parents")
 @NoArgsConstructor
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Parent extends User {
 
     @OneToOne(mappedBy = "parent", cascade = CascadeType.ALL)

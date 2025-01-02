@@ -1,22 +1,20 @@
 package com.habbypanda.bus_mangment_system.user.parent;
 
-import com.habbypanda.bus_mangment_system.user.Role;
-import com.habbypanda.bus_mangment_system.user.UserDTO;
-import lombok.*;
+import com.habbypanda.bus_mangment_system.user.student.Student;
 
-@Getter
-@Setter
-@NoArgsConstructor
-public class ParentDTO extends UserDTO {
-    private Integer studentId;
+public class ParentDTO {
+    private String name;
+    private String email;
+    private String password;
+    private Integer StudentID;
 
-    public ParentDTO(Integer id, String name, String email, Role role, Integer studentId) {
-        super(id, name, email, role);
-        this.studentId = studentId;
+    public Parent toParent(Student student) {
+        return Parent.builder()
+                .name(name)
+                .email(email)
+                .password(password)
+                .student(student != null ? student : new Student())
+                .build();
     }
 
-    public ParentDTO(Parent parent) {
-        super(parent.getId(), parent.getName(), parent.getEmail(), parent.getRole());
-        this.studentId = (parent.getStudent() != null) ? parent.getStudent().getId() : null;
-    }
 }

@@ -161,9 +161,9 @@ public class AuthenticationService {
     }
 
 
-    public UserResponse checkAuth(String userEmail) {
+    public UserResponse<User> checkAuth(String userEmail) {
         UserDetails userDetails = composedDetailsService.loadUserByUsername(userEmail);
         User user = (User) userDetails;
-        return new UserResponse("User authenticated", HttpStatus.OK, user);
+        return new UserResponse<User>("User authenticated", HttpStatus.OK, user);
     }
 }

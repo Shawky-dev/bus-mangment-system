@@ -51,14 +51,14 @@ public class Route {
     )
     private List<Student> students; // Students registered for this route
 
-    // Association with DropOffPickUp (Many routes can have many locations)
+    // Association with Stops (Many routes can have many stops)
     @ManyToMany
     @JoinTable(
             name = "route_stops",
             joinColumns = @JoinColumn(name = "route_id"),
             inverseJoinColumns = @JoinColumn(name = "stop_id")
     )
-    private List<Stop> stops; // Drop-off/Pick-up locations for the route
+    private List<Stop> stops; // Stops for the route
 
     @Builder
     public Route(LocalDate date, LocalTime timeSlot, RouteType type, Area area) {

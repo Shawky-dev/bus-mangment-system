@@ -9,6 +9,6 @@ import java.util.List;
  */
 public interface StopRepository extends JpaRepository<Stop, Integer> {
 
-    // Find all locations by area ID
+    // Find all stops by area ID
     List<Stop> findByAreaId(Integer areaId);
 }

@@ -15,6 +15,6 @@ import java.util.List;
 public class StopResponse {
     private String message;
     private HttpStatus status;
-    private Stop location; // For single location operations
-    private List<Stop> locations; // For list-based operations
+    private Stop stop; // For single location operations
+    private List<Stop> stops; // For list-based operations
 }

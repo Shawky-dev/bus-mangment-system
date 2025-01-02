@@ -8,17 +8,17 @@ import org.springframework.web.bind.annotation.*;
  * Controller for managing DropOffPickUp locations.
  */
 @RestController
-@RequestMapping("/dev/admin/dropOffPickUp")
+@RequestMapping("/dev/admin/stop")
 @RequiredArgsConstructor
 public class StopController {
 
     private final StopService stopService;
 
     @PostMapping("/create")
-    public ResponseEntity<StopResponse> createLocation(@RequestBody StopRequest request) {
-        StopResponse response = stopService.createLocation(
+    public ResponseEntity<StopResponse> createStop(@RequestBody StopRequest request) {
+        StopResponse response = stopService.createStop(
                 request.getAreaId(),
-                request.getLocationName()
+                request.getStopName()
         );
         return ResponseEntity.status(response.getStatus()).body(response);
     }
@@ -27,17 +27,17 @@ public class StopController {
 
     // Get all DropOffPickUp locations for a specific area
     @GetMapping("/getArea/{areaId}")
-    public ResponseEntity<StopResponse> getLocationsByArea(@PathVariable Integer areaId) {
-        StopResponse response = stopService.getLocationsByArea(areaId);
+    public ResponseEntity<StopResponse> getStopByArea(@PathVariable Integer areaId) {
+        StopResponse response = stopService.getStopsByArea(areaId);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
     // Delete a DropOffPickUp location
-    @DeleteMapping("/deleteLocation/{areaId}/{locationId}")
-    public ResponseEntity<StopResponse> deleteLocation(
+    @DeleteMapping("/deleteStop/{areaId}/{stopId}")
+    public ResponseEntity<StopResponse> deleteStop(
             @PathVariable Integer areaId,
-            @PathVariable Integer locationId) {
-        StopResponse response = stopService.deleteLocation(areaId, locationId);
+            @PathVariable Integer stopId) {
+        StopResponse response = stopService.deleteStop(areaId, stopId);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 

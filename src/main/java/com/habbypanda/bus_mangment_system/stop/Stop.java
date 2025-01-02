@@ -13,7 +13,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "dropoff_pickup")
+@Table(name = "stops")
 public class Stop {
 
     @Id
@@ -21,7 +21,7 @@ public class Stop {
     private Integer id;
 
     @Column(nullable = false)
-    private String locationName; // Descriptive name of the location (e.g., Gate 1, Street 5)
+    private String stopName; // Descriptive name of the location (e.g., Gate 1, Street 5)
 
     @ManyToOne
     @JoinColumn(name = "area_id", nullable = false)
@@ -29,8 +29,8 @@ public class Stop {
     private Area area; // Each location belongs to one area
 
     @Builder
-    public Stop(String locationName, Area area) {
-        this.locationName = locationName;
+    public Stop(String stopName, Area area) {
+        this.stopName = stopName;
         this.area = area;
     }
 }

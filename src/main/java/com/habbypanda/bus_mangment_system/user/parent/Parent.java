@@ -15,7 +15,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "Parent")
+@Table(name = "parents")
 @NoArgsConstructor
 public class Parent extends User {
 

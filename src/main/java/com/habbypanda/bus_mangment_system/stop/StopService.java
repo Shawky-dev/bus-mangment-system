@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Service for managing DropOffPickUp locations.
+ * Service for managing DropOffPickUp stops.
  */
 @Service
 @RequiredArgsConstructor
@@ -19,8 +19,8 @@ public class StopService {
     private final StopRepository stopRepository;
     private final AreaRepository areaRepository;
 
-    // Create a new DropOffPickUp location for an area
-    public StopResponse createLocation(Integer areaId, String locationName) {
+    // Create a new DropOffPickUp stop for an area
+    public StopResponse createStop(Integer areaId, String stopName) {
         Optional<Area> optionalArea = areaRepository.findById(areaId);
         if (optionalArea.isEmpty()) {
             return StopResponse.builder()
@@ -31,31 +31,31 @@ public class StopService {
 
         Area area = optionalArea.get();
 
-        if (locationName == null || locationName.trim().isEmpty()) {
+        if (stopName == null || stopName.trim().isEmpty()) {
             return StopResponse.builder()
-                    .message("Location name cannot be empty")
+                    .message("stop name cannot be empty")
                     .status(HttpStatus.BAD_REQUEST)
                     .build();
         }
 
-        Stop location = Stop.builder()
-                .locationName(locationName)
+        Stop stop = Stop.builder()
+                .stopName(stopName)
                 .area(area)
                 .build();
 
-        stopRepository.save(location);
+        stopRepository.save(stop);
 
         return StopResponse.builder()
-                .message("Location created successfully")
+                .message("stop created successfully")
                 .status(HttpStatus.CREATED)
-                .location(location)
+                .stop(stop)
                 .build();
     }
 
 
 
-    // Get all locations for a specific area
-    public StopResponse getLocationsByArea(Integer areaId) {
+    // Get all stops for a specific area
+    public StopResponse getStopsByArea(Integer areaId) {
         boolean areaExists = areaRepository.existsById(areaId);
         if (!areaExists) {
             return StopResponse.builder()
@@ -64,24 +64,24 @@ public class StopService {
                     .build();
         }
 
-        List<Stop> locations = stopRepository.findByAreaId(areaId);
+        List<Stop> stops = stopRepository.findByAreaId(areaId);
 
-        if (locations.isEmpty()) {
+        if (stops.isEmpty()) {
             return StopResponse.builder()
-                    .message("No locations found for this area")
+                    .message("No stops found for this area")
                     .status(HttpStatus.NOT_FOUND)
                     .build();
         }
 
         return StopResponse.builder()
-                .message("Locations retrieved successfully")
+                .message("stops retrieved successfully")
                 .status(HttpStatus.OK)
-                .locations(locations)
+                .stops(stops)
                 .build();
     }
 
-    // Delete a DropOffPickUp location
-    public StopResponse deleteLocation(Integer areaId, Integer locationId) {
+    // Delete a DropOffPickUp stop
+    public StopResponse deleteStop(Integer areaId, Integer stopId) {
         // Validate if the Area exists
         Optional<Area> optionalArea = areaRepository.findById(areaId);
         if (optionalArea.isEmpty()) {
@@ -93,19 +93,19 @@ public class StopService {
 
         Area area = optionalArea.get();
 
-        // Validate if the location exists within the specified Area
-        Optional<Stop> optionalLocation = stopRepository.findById(locationId);
-        if (optionalLocation.isEmpty() || !optionalLocation.get().getArea().getId().equals(areaId)) {
+        // Validate if the stop exists within the specified Area
+        Optional<Stop> optionalStop = stopRepository.findById(stopId);
+        if (optionalStop.isEmpty() || !optionalStop.get().getArea().getId().equals(areaId)) {
             return StopResponse.builder()
-                    .message("Location not found in the specified area")
+                    .message("stop not found in the specified area")
                     .status(HttpStatus.NOT_FOUND)
                     .build();
         }
 
-        stopRepository.deleteById(locationId);
+        stopRepository.deleteById(stopId);
 
         return StopResponse.builder()
-                .message("Location deleted successfully from the specified area")
+                .message("stop deleted successfully from the specified area")
                 .status(HttpStatus.OK)
                 .build();
     }

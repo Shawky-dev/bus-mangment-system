@@ -35,7 +35,7 @@ public class Area {
 
     @OneToMany(mappedBy = "area", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
-    private List<Stop> stopLocations; // Static list of drop-off/pick-up locations
+    private List<Stop> stops; // Static list of Stops
 
     @Builder
     public Area(String name) {

@@ -10,18 +10,18 @@ import java.util.Optional;
 @NoArgsConstructor
 public class StopDTO {
     private Integer id;
-    private String locationName;
+    private String stopName;
     private Integer areaID;
 
-    public StopDTO(Integer id, String locationName, Area area) {
+    public StopDTO(Integer id, String stopName, Area area) {
         this.id = id;
-        this.locationName = locationName;
+        this.stopName = StopDTO.this.stopName;
         this.areaID = area.getId();
     }
 
     public StopDTO(Stop stop) {
         this.id = stop.getId();
-        this.locationName = stop.getLocationName();
+        this.stopName = stop.getStopName();
         this.areaID = Optional.ofNullable(stop.getArea())
                 .map(Area::getId)
                 .orElse(null);

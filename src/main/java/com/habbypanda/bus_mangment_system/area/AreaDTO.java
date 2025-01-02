@@ -17,26 +17,27 @@ public class AreaDTO {
     private String name;
     private List<StudentDTO> students;
     private List<RouteDTO> routes;
-    private List<StopDTO> stopLocations;
+    private List<StopDTO> stop;
 
-    public AreaDTO(Integer id, String name, List<StudentDTO> students, List<RouteDTO> routes, List<StopDTO> stopLocations) {
+    public AreaDTO(Integer id, String name, List<StudentDTO> students, List<RouteDTO> routes, List<StopDTO> stop) {
         this.id = id;
         this.name = name;
         this.students = students;
         this.routes = routes;
-        this.stopLocations = stopLocations;
+        this.stop = stop;
     }
 
     public AreaDTO(Area area) {
-        this.id = area.getId();
-        this.name = area.getName();
+        if(area == null) return;
+        this.id = (area.getId() != null) ? area.getId() : null;
+        this.name = (area.getName() != null) ? area.getName() : null;
         this.students = Optional.ofNullable(area.getStudents())
                 .map(list -> list.stream().map(StudentDTO::new).collect(Collectors.toList()))
                 .orElse(null);
         this.routes = Optional.ofNullable(area.getRoutes())
                 .map(list -> list.stream().map(RouteDTO::new).collect(Collectors.toList()))
                 .orElse(null);
-        this.stopLocations = Optional.ofNullable(area.getStopLocations())
+        this.stop = Optional.ofNullable(area.getStops())
                 .map(list -> list.stream().map(StopDTO::new).collect(Collectors.toList()))
                 .orElse(null);
     }

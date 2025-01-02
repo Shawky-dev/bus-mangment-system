@@ -13,7 +13,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "Driver")
+@Table(name = "drivers")
 public class Driver extends User {
     private Integer driverLicense;
 

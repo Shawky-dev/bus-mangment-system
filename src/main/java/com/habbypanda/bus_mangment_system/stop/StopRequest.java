@@ -13,6 +13,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class StopRequest {
-    private String locationName; // Name of the location (e.g., Gate 1, Street 5)
+    private String stopName; // Name of the location (e.g., Gate 1, Street 5)
     private Integer areaId;      // ID of the associated area
 }

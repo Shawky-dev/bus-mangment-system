@@ -38,11 +38,8 @@ public class AreaController {
         return ResponseEntity.status(response.getStatus()).body(response);
     }
     ///Routes
-    @PostMapping("/addRouteToArea")
-    public ResponseEntity<AreaResponse> addRouteToArea(@RequestParam Integer areaId) {
-        AreaResponse response = areaService.addRouteToArea(areaId);
-        return ResponseEntity.status(response.getStatus()).body(response);
-    }
+
+    //Stops
     @PostMapping("/addStopToArea")
     public ResponseEntity<AreaResponse> addStopToRoute(@RequestParam Integer areaId, @RequestParam String stopName) {
         AreaResponse response = areaService.addStopToArea(areaId, stopName);

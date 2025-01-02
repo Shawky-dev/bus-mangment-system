@@ -26,4 +26,6 @@ public class Stop {
     @JoinColumn(name = "area_id", nullable = false)
     private Area area;
 
+    
+
 }

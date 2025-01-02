@@ -60,17 +60,6 @@ public class AreaService {
         return AreaResponse.builder().area(area).status(HttpStatus.OK).message("Student removed from area successfully").build();
     }
     //Routes
-    public AreaResponse addRouteToArea(Integer areaId) {
-        if (!areaRepository.existsById(areaId)) {
-            return AreaResponse.builder().status(HttpStatus.NOT_FOUND).message("Area not found").build();
-        }
-        Area area = areaRepository.findById(areaId).orElseThrow(() -> new RuntimeException("Area not found"));
-        Route route = Route.builder().area(area).build();
-        area.getRoutes().add(route);
-        areaRepository.save(area);
-        routeRepository.save(route);
-        return AreaResponse.builder().area(area).status(HttpStatus.OK).message("Route added to area successfully").build();
-    }
     //Stops
     public AreaResponse addStopToArea(Integer areaId,String stopName) {
         if (!areaRepository.existsById(areaId)) {

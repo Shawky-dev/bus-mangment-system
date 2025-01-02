@@ -15,9 +15,4 @@ public class StudentController {
         UserResponse<Student> response = studentService.getAllStudents();
         return ResponseEntity.status(response.getStatus()).body(response);
     }
-    @PutMapping("/selectStop")
-    public ResponseEntity<UserResponse<Student>> selectStop(@RequestParam Integer studentId, @RequestParam Integer stopId) {
-        UserResponse<Student> response = studentService.selectStop(studentId, stopId);
-        return ResponseEntity.status(response.getStatus()).body(response);
-    }
 }

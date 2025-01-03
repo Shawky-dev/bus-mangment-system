@@ -18,4 +18,6 @@ public interface RouteRepository extends JpaRepository<Route, Integer> {
 
     // Find routes by date and area
     List<Route> findByDateAndArea_Id(LocalDate date, Integer areaId);
+
+    boolean existsByIdAndAreaId(Integer routeId, Integer areaId);
 }

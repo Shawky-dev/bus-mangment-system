@@ -19,4 +19,9 @@ public class StudentController {
         StudentResponse response = studentService.selectStop(studentId, stopId);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
+    @PutMapping("/selectAreaStopRoute")
+    public ResponseEntity<StudentResponse> selectAreaStopRoute(@RequestParam Integer studentId, @RequestParam Integer areaId, @RequestParam Integer stopId, @RequestParam Integer routeId) {
+        StudentResponse response = studentService.selectAreaStopRoute(studentId, areaId, stopId, routeId);
+        return ResponseEntity.status(response.getStatus()).body(response);
+    }
 }

@@ -76,15 +76,28 @@ public class AreaService {
     }
 
     // Stops
-    public AreaResponse addStopToArea(Integer areaId, String stopName) {
+    public AreaResponse addStopToArea(Integer areaId, String stopName, Integer stopPriority) {
         if (!areaRepository.existsById(areaId)) {
             return new AreaResponse("Area not found", HttpStatus.NOT_FOUND, (Area) null);
         }
         Area area = areaRepository.findById(areaId).orElseThrow(() -> new RuntimeException("Area not found"));
-        Stop stop = Stop.builder().name(stopName).area(area).build();
+        Stop stop = Stop.builder().name(stopName).area(area).priority(stopPriority).build();
         area.getStops().add(stop);
         areaRepository.save(area);
         return new AreaResponse("Stop added to area successfully", HttpStatus.OK, area);
+    }
+    public AreaResponse deleteStopFromArea(Integer areaId, Integer stopId) {
+        if (!areaRepository.existsById(areaId)) {
+            return new AreaResponse("Area not found", HttpStatus.NOT_FOUND, (Area) null);
+        }
+        Area area = areaRepository.findById(areaId).orElseThrow(() -> new RuntimeException("Area not found"));
+        if (!stopRepository.existsById(stopId)) {
+            return new AreaResponse("Stop not found", HttpStatus.NOT_FOUND, (Area) null);
+        }
+        Stop stop = stopRepository.findById(stopId).orElseThrow(() -> new RuntimeException("Stop not found"));
+        area.getStops().remove(stop);
+        areaRepository.save(area);
+        return new AreaResponse("Stop removed from area successfully", HttpStatus.OK, area);
     }
 
     public AreaResponse editAreaName(Integer areaId, String name) {

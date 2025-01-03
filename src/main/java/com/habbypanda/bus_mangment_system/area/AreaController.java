@@ -41,8 +41,13 @@ public class AreaController {
 
     //Stops
     @PostMapping("/addStopToArea")
-    public ResponseEntity<AreaResponse> addStopToRoute(@RequestParam Integer areaId, @RequestParam String stopName) {
-        AreaResponse response = areaService.addStopToArea(areaId, stopName);
+    public ResponseEntity<AreaResponse> addStopToRoute(@RequestParam Integer areaId, @RequestParam String stopName,@RequestParam Integer stopPriority) {
+        AreaResponse response = areaService.addStopToArea(areaId, stopName, stopPriority);
+        return ResponseEntity.status(response.getStatus()).body(response);
+    }
+    @DeleteMapping("/deleteStopFromArea")
+    public ResponseEntity<AreaResponse> deleteStopFromRoute(@RequestParam Integer areaId, @RequestParam Integer stopId) {
+        AreaResponse response = areaService.deleteStopFromArea(areaId, stopId);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
     @PutMapping("/editAreaName")

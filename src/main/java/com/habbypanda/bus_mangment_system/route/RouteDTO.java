@@ -14,7 +14,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class RouteDTO {
+public class RouteDTO
+{
     private Integer id;
     private LocalDate date;
     private TimeSlot timeSlot;

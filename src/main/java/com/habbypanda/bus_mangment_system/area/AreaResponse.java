@@ -12,7 +12,8 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-public class AreaResponse {
+public class AreaResponse
+{
     private String message;
     private HttpStatus status;
     private AreaDTO area; // Single AreaDTO

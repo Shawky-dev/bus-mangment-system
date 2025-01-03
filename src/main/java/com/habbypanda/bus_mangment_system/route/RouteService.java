@@ -27,6 +27,7 @@ public class RouteService {
 
     // Create a new Route for an area
     public RouteResponse createRoute(RouteRequest request) {
+        //fetch area and time slot
         Optional<Area> optionalArea = areaRepository.findById(request.getAreaId());
         if (optionalArea.isEmpty()) {
             return RouteResponse.builder()
@@ -55,11 +56,7 @@ public class RouteService {
 
         routeRepository.save(route);
 
-        return RouteResponse.builder()
-                .message("Route created successfully")
-                .status(HttpStatus.CREATED)
-                .route(route)
-                .build();
+        return new RouteResponse("Route created successfully", HttpStatus.CREATED, route);
     }
 
     // Retrieve all routes for a specific area
@@ -82,11 +79,9 @@ public class RouteService {
                     .build();
         }
 
-        return RouteResponse.builder()
-                .message("Routes retrieved successfully")
-                .status(HttpStatus.OK)
-                .routes(routes)
-                .build();
+        return new RouteResponse("Routes retrieved successfully", HttpStatus.OK, routes);
+
+
     }
 
     // Retrieve routes by area and time slot
@@ -116,11 +111,7 @@ public class RouteService {
                     .build();
         }
 
-        return RouteResponse.builder()
-                .message("Routes retrieved successfully")
-                .status(HttpStatus.OK)
-                .routes(routes)
-                .build();
+        return new RouteResponse("Routes retrieved successfully", HttpStatus.OK, routes);
     }
 
     // Delete a route
@@ -187,11 +178,7 @@ public class RouteService {
         route.getStudents().add(student);
         routeRepository.save(route);
 
-        return RouteResponse.builder()
-                .message("Student added to route successfully")
-                .status(HttpStatus.OK)
-                .route(route)
-                .build();
+        return new RouteResponse("Student added to route successfully", HttpStatus.OK, route);
     }
 
 
@@ -217,11 +204,7 @@ public class RouteService {
         route.setStatus(RouteStatus.IN_PROGRESS);
         routeRepository.save(route);
 
-        return RouteResponse.builder()
-                .message("Route started successfully")
-                .status(HttpStatus.OK)
-                .route(route)
-                .build();
+        return new RouteResponse("Route started successfully", HttpStatus.OK, route);
     }
     //End Ride
     public RouteResponse completeRoute(Integer routeId) {
@@ -245,11 +228,7 @@ public class RouteService {
         route.setStatus(RouteStatus.COMPLETED);
         routeRepository.save(route);
 
-        return RouteResponse.builder()
-                .message("Route completed successfully")
-                .status(HttpStatus.OK)
-                .route(route)
-                .build();
+        return new RouteResponse("Route completed successfully", HttpStatus.OK, route);
     }
 
 }

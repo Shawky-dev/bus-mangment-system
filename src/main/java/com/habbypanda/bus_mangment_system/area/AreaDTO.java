@@ -18,4 +18,5 @@ public class AreaDTO {
     private List<StudentDTO> students;
     private List<RouteDTO> routes;
     private List<StopDTO> stops;
+
 }

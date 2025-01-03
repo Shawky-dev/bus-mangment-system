@@ -1,5 +1,5 @@
 package com.habbypanda.bus_mangment_system.user.student;
-
+import com.habbypanda.bus_mangment_system.bus.Bus;
 import com.fasterxml.jackson.annotation.*;
 import com.habbypanda.bus_mangment_system.area.Area;
 import com.habbypanda.bus_mangment_system.route.Route;
@@ -30,6 +30,10 @@ public class Student extends User {
     @ManyToOne
     @JoinColumn(name = "route_id")
     private Route route; // Route associated with the student
+
+    @ManyToOne
+    @JoinColumn(name = "bus_id") // Define the foreign key column
+    private Bus bus;
 
     @ManyToOne
     @JoinColumn(name = "stop_id")

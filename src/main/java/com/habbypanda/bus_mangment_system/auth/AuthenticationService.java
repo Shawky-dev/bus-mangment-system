@@ -197,6 +197,7 @@ public class AuthenticationService {
         parent.setName(request.getName());
         parent.setEmail(request.getEmail());
 
+
         // Update password only if it's provided
         if (request.getPassword() != null && !request.getPassword().isEmpty()) {
             parent.setPassword(passwordEncoder.encode(request.getPassword()));

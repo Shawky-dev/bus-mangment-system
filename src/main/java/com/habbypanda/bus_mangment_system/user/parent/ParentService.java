@@ -20,16 +20,28 @@ public class ParentService {
         if (parent == null) {
             return new ParentResponse("Parent not found", HttpStatus.NOT_FOUND);
         }
-        Student student = studentRepository.findById(studentId).orElse(null);
-        if (student == null) {
+        Student newStudent = studentRepository.findById(studentId).orElse(null);
+        if (newStudent == null) {
             return new ParentResponse("Student not found", HttpStatus.NOT_FOUND);
         }
-        parent.setStudent(student);
-        student.setParent(parent);
+        // If parent already has a student, disassociate the old student
+        if (parent.getStudent() != null) {
+            Student oldStudent = parent.getStudent();
+            oldStudent.setParent(null);
+            studentRepository.save(oldStudent);
+        }
+        // If new student already has a parent, disassociate the old parent
+        if (newStudent.getParent() != null && !newStudent.getParent().getId().equals(parentId)) {
+            Parent oldParent = newStudent.getParent();
+            oldParent.setStudent(null);
+            parentRepository.save(oldParent);
+        }
+        // Assign new student to parent
+        newStudent.setParent(parent);
+        parent.setStudent(newStudent);
+        // Save both
+        studentRepository.save(newStudent);
         parentRepository.save(parent);
-        studentRepository.save(student);
-
         return new ParentResponse("Student added to parent", HttpStatus.OK, parent);
-
     }
 }

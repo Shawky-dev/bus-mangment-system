@@ -45,4 +45,9 @@ public class AreaController {
         AreaResponse response = areaService.addStopToArea(areaId, stopName);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
+    @PutMapping("/editAreaName")
+    public ResponseEntity<AreaResponse> editAreaName(@RequestParam Integer areaId, @RequestParam String name) {
+        AreaResponse response = areaService.editAreaName(areaId, name);
+        return ResponseEntity.status(response.getStatus()).body(response);
+    }
 }

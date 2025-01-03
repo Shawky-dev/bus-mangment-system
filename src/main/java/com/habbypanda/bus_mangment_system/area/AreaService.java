@@ -77,7 +77,16 @@ public class AreaService {
         Stop stop = Stop.builder().name(stopName).area(area).build();
         area.getStops().add(stop);
         areaRepository.save(area);
-        stopRepository.save(stop);
         return new AreaResponse("Stop added to area successfully", HttpStatus.OK, area);
+    }
+
+    public AreaResponse editAreaName(Integer areaId, String name) {
+        if (!areaRepository.existsById(areaId)) {
+            return new AreaResponse("Area not found", HttpStatus.NOT_FOUND, (Area) null);
+        }
+        Area area = areaRepository.findById(areaId).orElseThrow(() -> new RuntimeException("Area not found"));
+        area.setName(name);
+        areaRepository.save(area);
+        return new AreaResponse("Area name updated successfully", HttpStatus.OK, area);
     }
 }

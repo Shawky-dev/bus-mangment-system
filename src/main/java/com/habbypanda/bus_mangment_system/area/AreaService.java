@@ -49,6 +49,8 @@ public class AreaService {
             return new AreaResponse("Student not found", HttpStatus.NOT_FOUND, (Area) null);
         }
         Student student = studentRepository.findById(studentId).orElseThrow(() -> new RuntimeException("Student not found"));
+        student.setStop(null);
+        student.setRoute(null);
         area.getStudents().add(student);
         areaRepository.save(area);
         return new AreaResponse("Student added to area successfully", HttpStatus.OK, area);
@@ -64,7 +66,12 @@ public class AreaService {
         }
         Student student = studentRepository.findById(studentId).orElseThrow(() -> new RuntimeException("Student not found"));
         area.getStudents().remove(student);
+        //remove areaid, routeid, stopid from student
+        student.setArea(null);
+        student.setStop(null);
+        student.setRoute(null);
         areaRepository.save(area);
+        studentRepository.save(student);
         return new AreaResponse("Student removed from area successfully", HttpStatus.OK, area);
     }
 

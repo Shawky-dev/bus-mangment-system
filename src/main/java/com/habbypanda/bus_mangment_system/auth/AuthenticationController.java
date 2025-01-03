@@ -16,20 +16,17 @@ public class AuthenticationController {
     @PostMapping("/registerStudent")
     public ResponseEntity<AuthenticatorResponse> registerStudent(@RequestBody StudentRegistrationRequest request, HttpServletResponse response) {
         AuthenticatorResponse authResponse = authenticationService.registerStudent(request);
-        authResponse.setHttpOnlyCookie(response);
         return ResponseEntity.status(authResponse.getStatus()).body(authResponse);
     }
     @PostMapping("/registerParent")
     public ResponseEntity<AuthenticatorResponse> registerParent(@RequestBody ParentRegistrationRequest request, HttpServletResponse response) {
         AuthenticatorResponse authResponse = authenticationService.registerParent(request);
-        authResponse.setHttpOnlyCookie(response);
         return ResponseEntity.status(authResponse.getStatus()).body(authResponse);
     }
 
     @PostMapping("/registerDriver")
     public ResponseEntity<AuthenticatorResponse> registerDriver(@RequestBody DriverRegistrationRequest request, HttpServletResponse response) {
         AuthenticatorResponse authResponse = authenticationService.registerDriver(request);
-        authResponse.setHttpOnlyCookie(response);
         return ResponseEntity.status(authResponse.getStatus()).body(authResponse);
     }
 
@@ -78,5 +75,29 @@ public class AuthenticationController {
         AuthenticatorResponse authResponse = new AuthenticatorResponse();
         authResponse.clearHttpOnlyCookie(response);
         return ResponseEntity.status(authResponse.getStatus()).body(authResponse.getMessage());
+    }
+
+    @PostMapping("/editStudent/{id}")
+    public ResponseEntity<AuthenticatorResponse> editStudent(@PathVariable Integer id, @RequestBody EditUserRequest request) {
+        AuthenticatorResponse authResponse = authenticationService.editStudent(id, request);
+        return ResponseEntity.status(authResponse.getStatus()).body(authResponse);
+    }
+
+    @PostMapping("/editParent/{id}")
+    public ResponseEntity<AuthenticatorResponse> editParent(@PathVariable Integer id, @RequestBody EditUserRequest request) {
+        AuthenticatorResponse authResponse = authenticationService.editParent(id, request);
+        return ResponseEntity.status(authResponse.getStatus()).body(authResponse);
+    }
+
+    @PostMapping("/editDriver/{id}")
+    public ResponseEntity<AuthenticatorResponse> editDriver(@PathVariable Integer id, @RequestBody EditUserRequest request) {
+        AuthenticatorResponse authResponse = authenticationService.editDriver(id, request);
+        return ResponseEntity.status(authResponse.getStatus()).body(authResponse);
+    }
+
+    @PostMapping("/editAdmin/{id}")
+    public ResponseEntity<AuthenticatorResponse> editAdmin(@PathVariable Integer id, @RequestBody EditUserRequest request) {
+        AuthenticatorResponse authResponse = authenticationService.editAdmin(id, request);
+        return ResponseEntity.status(authResponse.getStatus()).body(authResponse);
     }
 }

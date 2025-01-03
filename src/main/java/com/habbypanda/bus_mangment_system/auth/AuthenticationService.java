@@ -166,4 +166,67 @@ public class AuthenticationService {
         User user = (User) userDetails;
         return new UserResponse<>("User authenticated", HttpStatus.OK, user);
     }
+    public AuthenticatorResponse editStudent(Integer id, EditUserRequest request) {
+        if (request.getName() == null || request.getEmail() == null || request.getPassword() == null) {
+            return AuthenticatorResponse.builder().message("Invalid credentials").status(HttpStatus.BAD_REQUEST).build();
+        }
+
+        Student student = studentRepository.findById(id).orElseThrow(() -> new UsernameNotFoundException("Student not found"));
+
+        // Update name, email, and password
+        student.setName(request.getName());
+        student.setEmail(request.getEmail());
+        student.setPassword(passwordEncoder.encode(request.getPassword()));
+
+        studentRepository.save(student);
+        return AuthenticatorResponse.builder().message("Student updated successfully").status(HttpStatus.OK).build();
+    }
+
+    public AuthenticatorResponse editParent(Integer id, EditUserRequest request) {
+        if (request.getName() == null || request.getEmail() == null || request.getPassword() == null) {
+            return AuthenticatorResponse.builder().message("Invalid credentials").status(HttpStatus.BAD_REQUEST).build();
+        }
+
+        Parent parent = parentRepository.findById(id).orElseThrow(() -> new UsernameNotFoundException("Parent not found"));
+
+        // Update name, email, and password
+        parent.setName(request.getName());
+        parent.setEmail(request.getEmail());
+        parent.setPassword(passwordEncoder.encode(request.getPassword()));
+
+        parentRepository.save(parent);
+        return AuthenticatorResponse.builder().message("Parent updated successfully").status(HttpStatus.OK).build();
+    }
+
+    public AuthenticatorResponse editDriver(Integer id, EditUserRequest request) {
+        if (request.getName() == null || request.getEmail() == null || request.getPassword() == null) {
+            return AuthenticatorResponse.builder().message("Invalid credentials").status(HttpStatus.BAD_REQUEST).build();
+        }
+
+        Driver driver = driverRepository.findById(id).orElseThrow(() -> new UsernameNotFoundException("Driver not found"));
+
+        // Update name, email, and password
+        driver.setName(request.getName());
+        driver.setEmail(request.getEmail());
+        driver.setPassword(passwordEncoder.encode(request.getPassword()));
+
+        driverRepository.save(driver);
+        return AuthenticatorResponse.builder().message("Driver updated successfully").status(HttpStatus.OK).build();
+    }
+
+    public AuthenticatorResponse editAdmin(Integer id, EditUserRequest request) {
+        if (request.getName() == null || request.getEmail() == null || request.getPassword() == null) {
+            return AuthenticatorResponse.builder().message("Invalid credentials").status(HttpStatus.BAD_REQUEST).build();
+        }
+
+        Admin admin = adminRepository.findById(id).orElseThrow(() -> new UsernameNotFoundException("Admin not found"));
+
+        // Update name, email, and password
+        admin.setName(request.getName());
+        admin.setEmail(request.getEmail());
+        admin.setPassword(passwordEncoder.encode(request.getPassword()));
+
+        adminRepository.save(admin);
+        return AuthenticatorResponse.builder().message("Admin updated successfully").status(HttpStatus.OK).build();
+    }
 }

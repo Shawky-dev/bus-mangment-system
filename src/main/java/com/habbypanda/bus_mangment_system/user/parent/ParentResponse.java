@@ -1,10 +1,11 @@
 package com.habbypanda.bus_mangment_system.user.parent;
 
 import com.habbypanda.bus_mangment_system.utils.DTOMapper;
+import lombok.Data;
 import org.springframework.http.HttpStatus;
 
 import java.util.List;
-
+@Data
 public class ParentResponse {
     private String message;
     private HttpStatus status;

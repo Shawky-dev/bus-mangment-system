@@ -1,6 +1,6 @@
 package com.habbypanda.bus_mangment_system.route;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.*;
 import com.habbypanda.bus_mangment_system.area.Area;
 import com.habbypanda.bus_mangment_system.route.TimeSlot.TimeSlot;
 import com.habbypanda.bus_mangment_system.user.student.Student;
@@ -46,9 +46,7 @@ public class Route {
     // Association with an Area (Many routes can be associated with one area)
     @ManyToOne
     @JoinColumn(name = "area_id", nullable = false)
-    @JsonBackReference
     private Area area; // Association with an Area
-
     // Association with Student (One route can have many students)
     @OneToMany(mappedBy = "route")
     private List<Student> students; // Students registered for this route
@@ -70,4 +68,5 @@ public class Route {
         this.area = area;
         this.status = status;
     }
+
 }

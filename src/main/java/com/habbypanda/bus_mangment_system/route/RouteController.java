@@ -31,8 +31,8 @@ public class RouteController {
     }
 
     // Get routes by area and time slot
-    @GetMapping("/getRoutesByAreaAndTimeSlot/{areaId}")
-    public ResponseEntity<RouteResponse> getRoutesByAreaAndTimeSlot(@PathVariable Integer areaId, @RequestParam Integer timeSlotId) {
+    @GetMapping("/getRoutesByAreaAndTimeSlot/{areaId}/{timeSlotId}")
+    public ResponseEntity<RouteResponse> getRoutesByAreaAndTimeSlot(@PathVariable Integer areaId, @PathVariable Integer timeSlotId) {
         RouteResponse response = routeService.getRoutesByAreaAndTimeSlot(areaId, timeSlotId);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
@@ -60,9 +60,9 @@ public class RouteController {
     }
 
     // add student to route
-    @PostMapping("/addStudentToRoute")
-    public ResponseEntity<RouteResponse> addStudentToRoute(@RequestBody RouteStudentRequest request) {
-        RouteResponse response = routeService.addStudentToRoute(request.getRouteId(), request.getStudentId());
+    @PostMapping("/addStudentToRoute/{routeId}/{studentId}")
+    public ResponseEntity<RouteResponse> addStudentToRoute(@PathVariable Integer routeId, @PathVariable Integer studentId) {
+        RouteResponse response = routeService.addStudentToRoute(routeId, studentId);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 

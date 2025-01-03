@@ -19,7 +19,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table(name = "admins")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 
 public class Admin extends User {
     @Id

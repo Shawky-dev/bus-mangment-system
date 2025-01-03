@@ -10,8 +10,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -75,7 +73,7 @@ public class RouteService {
                     .build();
         }
 
-        List<Route> routes = routeRepository.findByAreaId(areaId);
+        List<Route> routes = routeRepository.findByArea_Id(areaId);
 
         if (routes.isEmpty()) {
             return RouteResponse.builder()
@@ -109,7 +107,7 @@ public class RouteService {
                     .build();
         }
         TimeSlot timeSlot = optionalTimeSlot.get();
-        List<Route> routes = routeRepository.findByAreaIdAndTimeSlot(areaId, timeSlot);
+        List<Route> routes = routeRepository.findByArea_IdAndTimeSlot(areaId, timeSlot);
 
         if (routes.isEmpty()) {
             return RouteResponse.builder()
@@ -185,6 +183,7 @@ public class RouteService {
         }
 
         // Add Student to Route
+        student.setRoute(route);
         route.getStudents().add(student);
         routeRepository.save(route);
 
@@ -224,8 +223,6 @@ public class RouteService {
                 .route(route)
                 .build();
     }
-
-
     //End Ride
     public RouteResponse completeRoute(Integer routeId) {
         Optional<Route> optionalRoute = routeRepository.findById(routeId);

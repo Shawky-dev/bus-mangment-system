@@ -1,20 +1,18 @@
 package com.habbypanda.bus_mangment_system.user.parent;
 
-import com.habbypanda.bus_mangment_system.user.student.Student;
+import com.habbypanda.bus_mangment_system.user.Role;
+import com.habbypanda.bus_mangment_system.user.student.StudentDTO;
+import lombok.*;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class ParentDTO {
-    private String name;
-    private String email;
-    private String password;
-    private Integer StudentID;
-
-    public Parent toParent(Student student) {
-        return Parent.builder()
-                .name(name)
-                .email(email)
-                .password(password)
-                .student(student != null ? student : new Student())
-                .build();
-    }
-
+    private Integer id; // Unique identifier for the parent
+    private String name; // Name of the parent
+    private String email; // Email of the parent
+    private Role role; // Role of the parent
+    private Integer studentId; // Associated student (as a DTO)
 }

@@ -1,7 +1,6 @@
 package com.habbypanda.bus_mangment_system.user.student;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import com.habbypanda.bus_mangment_system.area.Area;
 import com.habbypanda.bus_mangment_system.route.Route;
 import com.habbypanda.bus_mangment_system.stop.Stop;
@@ -17,7 +16,6 @@ import lombok.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "students")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Student extends User {
 
     @OneToOne
@@ -43,4 +41,5 @@ public class Student extends User {
         super(id, name, email, password, Role.USER);
         this.parent = parent;
     }
+
 }

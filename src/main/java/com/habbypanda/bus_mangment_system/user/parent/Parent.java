@@ -19,7 +19,6 @@ import lombok.Setter;
 @Entity
 @Table(name = "parents")
 @NoArgsConstructor
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Parent extends User {
 
     @OneToOne(mappedBy = "parent", cascade = CascadeType.ALL)

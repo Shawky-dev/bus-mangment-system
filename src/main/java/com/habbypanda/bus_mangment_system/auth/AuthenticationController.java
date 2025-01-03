@@ -1,12 +1,8 @@
 package com.habbypanda.bus_mangment_system.auth;
 
 import com.habbypanda.bus_mangment_system.user.User;
-import com.habbypanda.bus_mangment_system.user.UserResponse;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -73,8 +69,8 @@ public class AuthenticationController {
     }
 
     @GetMapping("/check")
-    public ResponseEntity<UserResponse<User>> checkAuth(@RequestAttribute String userEmail) {
-        UserResponse<User> response = authenticationService.checkAuth(userEmail);
+    public ResponseEntity<UserResponse<?>> checkAuth(@RequestAttribute String userEmail) {
+        UserResponse<?> response = authenticationService.checkAuth(userEmail);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
     @GetMapping("/logout")
